@@ -17,7 +17,7 @@ compiler.warning_flags.default=
 compiler.warning_flags.more=-Wall
 compiler.warning_flags.all=-Wall -Wextra
 
-compiler.path={runtime.tools.xpack-arm-none-eabi-gcc-9.3.1-1.3.path}/bin/
+compiler.path={runtime.tools.xpack-arm-none-eabi-gcc-9.3.1-1.2.path}/bin/
 
 compiler.S.cmd=arm-none-eabi-gcc
 compiler.c.cmd=arm-none-eabi-gcc
@@ -64,8 +64,8 @@ compiler.ar.extra_flags=
 compiler.elf2bin.extra_flags=
 compiler.elf2hex.extra_flags=
 
-compiler.arm.cmsis.c.flags="-I{runtime.tools.CMSIS-5.7.0.path}/CMSIS/Core/Include/" "-I{build.system.path}/Drivers/CMSIS/Device/ST/{build.series}/Include/" "-I{build.system.path}/Drivers/CMSIS/Device/ST/{build.series}/Source/Templates/gcc/" "-I{runtime.tools.CMSIS-5.7.0.path}/CMSIS/DSP/Include" "-I{runtime.tools.CMSIS-5.7.0.path}/CMSIS/DSP/PrivateInclude"
-compiler.arm.cmsis.ldflags="-L{runtime.tools.CMSIS-5.7.0.path}/CMSIS/DSP/Lib/GCC/" -l{build.cmsis_lib_gcc}
+compiler.arm.cmsis.c.flags="-I{runtime.tools.CMSIS-5.5.1.path}/CMSIS/Core/Include/" "-I{build.system.path}/Drivers/CMSIS/Device/ST/{build.series}/Include/" "-I{build.system.path}/Drivers/CMSIS/Device/ST/{build.series}/Source/Templates/gcc/" "-I{runtime.tools.CMSIS-5.5.1.path}/CMSIS/DSP/Include"
+compiler.arm.cmsis.ldflags="-L{runtime.tools.CMSIS-5.5.1.path}/CMSIS/DSP/Lib/GCC/" -l{build.cmsis_lib_gcc}
 
 # USB Flags
 # ---------
@@ -172,39 +172,12 @@ tools.stm32CubeProg.upload.params.verbose=
 tools.stm32CubeProg.upload.params.quiet=
 tools.stm32CubeProg.upload.pattern="{path}/{cmd}" {upload.protocol} "{build.path}/{build.project_name}.bin" {upload.options}
 
-# blackmagic upload for generic STM32
-tools.bmp_upload.cmd=arm-none-eabi-gdb
-tools.bmp_upload.path={runtime.tools.xpack-arm-none-eabi-gcc.path}/bin
-tools.bmp_upload.upload.speed=230400
-tools.bmp_upload.upload.params.verbose=-batch
-tools.bmp_upload.upload.params.quiet=--batch-silent
-tools.bmp_upload.upload.pattern="{path}/{cmd}" -nx -b {upload.speed} {upload.verbose} -ex "set confirm off" -ex "target extended-remote {serial.port}" -ex "monitor swdp_scan" -ex "attach 1" -ex "load" -ex "compare-sections" -ex "kill" "{build.path}/{build.project_name}.elf"
-
-# HID flash 2.2 (HID bootloader v2.2 for STM32F1 and STM32F4 series)
-tools.hid_upload.cmd=hid-flash
-tools.hid_upload.cmd.windows=hid-flash.exe
-tools.hid_upload.path={runtime.tools.STM32Tools.path}/tools/win
-tools.hid_upload.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
-tools.hid_upload.path.linux={runtime.tools.STM32Tools.path}/tools/linux
-tools.hid_upload.upload.params.verbose=-d
-tools.hid_upload.upload.params.quiet=n
-tools.hid_upload.upload.pattern="{path}/{cmd}" "{build.path}/{build.project_name}.bin" {serial.port.file}
-
-# Upload using Maple bootloader over DFU
-tools.maple_upload.cmd=maple_upload.sh
-tools.maple_upload.cmd.windows=maple_upload.bat
-tools.maple_upload.path={runtime.tools.STM32Tools.path}/tools/win
-tools.maple_upload.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
-tools.maple_upload.path.linux={runtime.tools.STM32Tools.path}/tools/linux
-tools.maple_upload.upload.params.verbose=-d
-tools.maple_upload.upload.params.quiet=n
-tools.maple_upload.upload.pattern="{path}/{cmd}" {serial.port.file} {upload.altID} {upload.usbID} "{build.path}/{build.project_name}.bin"
-
-# STM32MP1 self-contained shell script
-tools.remoteproc_gen.path={runtime.tools.STM32Tools.path}/tools
-tools.remoteproc_gen.busybox=
-tools.remoteproc_gen.busybox.windows={path}/win/busybox.exe
-tools.remoteproc_gen.script=run_arduino_gen.sh
-tools.remoteproc_gen.upload.params.verbose=
-tools.remoteproc_gen.upload.params.quiet=
-tools.remoteproc_gen.upload.pattern="{busybox}" sh "{path}/{script}" generate "{build.path}/{build.project_name}.elf" "{build.path}/run_arduino_{build.project_name}.sh"
+# RECore upload
+tools.RECore_autoDFU.cmd=RECore_autoDFU.sh
+tools.RECore_autoDFU.cmd.windows=RECore_autoDFU.bat
+tools.RECore_autoDFU.path.linux={runtime.tools.STM32Tools.path}/tools/linux
+tools.RECore_autoDFU.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
+tools.RECore_autoDFU.path.windows={runtime.tools.STM32Tools.path}/tools/win
+tools.RECore_autoDFU.upload.params.verbose=
+tools.RECore_autoDFU.upload.params.quiet=
+tools.RECore_autoDFU.upload.pattern="{path}/{cmd}" {upload.protocol} "{build.path}/{build.project_name}.bin" {upload.options}
