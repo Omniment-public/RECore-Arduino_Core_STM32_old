@@ -48,36 +48,35 @@ extern "C" {
 // !!! #define PA2  A15 // 26 <-- if NUM_ANALOG_FIRST defined
 // !!! ...
 //#define PXn x
-
 #define PA10    0
 #define PA9     1
-#define PA15    2
-#define PB3     3
-#define PB10    4
-#define PB11    5
-#define PB4     6
-#define PB5     7
-#define PB0     8
-#define PB1     9
-#define PB7     10
-#define PB6     11
-#define PA4     12
+#define PA8     2
+#define PA7     3
+#define PA6     4
+#define PA5     5
+#define PA3     6
+#define PA2     7
+#define PA1     8
+#define PB2     9
+#define PB8     10
+#define PB9     11
+#define PA12    12
 #define PA11    13
-#define PA12    14
-#define PB12    15
-#define PB15    16
-#define PB14    17
-#define PB13    18
-#define PB8     19
-#define PB9     20
-#define PB2     21
-#define PA8     22
-#define PA7     23
-#define PA6     24
-#define PA5     25
-#define PA3     26
-#define PA2     27
-#define PA1     28
+#define PA15    14
+#define PB3     15
+#define PB10    16
+#define PB11    17
+#define PB4     18
+#define PB5     19
+#define PB0     20
+#define PB1     21
+#define PB7     22
+#define PB6     23
+#define PA4     24
+#define PB12    25
+#define PB15    26
+#define PB14    27
+#define PB13    28
 #define PA0     29
 
 // This must be a literal
@@ -131,7 +130,7 @@ extern "C" {
 #define LED_GREEN               LED_BUILTIN
 
 // On-board user button
-#define USER_BTN                PB2
+#define USER_BTN                PA12
 
 // Below SPI and I2C definitions already done in the core
 // Could be redefined here if differs from the default one

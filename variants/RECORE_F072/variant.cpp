@@ -28,81 +28,56 @@ const PinName digitalPin[] = {
     PA_10,  //D0 - VCP RX
     PA_9,   //D1 - VCP TX
     
-    //Motor Driver
-    PA_15,  //D2 - AIN1 1
-    PB_3,   //D3 - AIN2 1
-    PB_10,  //D4 - BIN1 1
-    PB_11,  //D5 - BIN2 1
-    PB_4,   //D6 - AIN1 2
-    PB_5,   //D7 - AIN2 2
-    PB_0,   //D8 - BIN1 2
-    PB_1,   //D9 - BIN2 2
-    PB_7,   //D10 - MSLEEP
-    PB_6,   //D11 - MFAULT
-    PA_4,   //D12 - DAC
+    //IO PIN Head
+    PA_8,   //D2    - A0 - GPIO0,Servo1
+    PA_7,   //D3    - A1 - GPIO1,Servo2
+    PA_6,   //D4    - A2 - GPIO2,
+    PA_5,   //D5    - A3 - GPIO3,Sens1
+    PA_3,   //D6    - A4 - GPIO4,Sens2
+    PA_2,   //D7    - A5 - GPIO5,Sens3
+    PA_1,   //D8    - A6 - GPIO6,Sens4
+    PB_2,   //D9    - GPIO7
+    PB_8,   //D10   - CAN RX,I2C SCL,Servo3
+    PB_9,   //D11   - CAN TX,I2C SDA,Servo4
     
     //Builtin IF
-    PA_11,  //D13 - LED
-    PA_12,  //D14 - SW
+    PA_12,  //D12   - SW
+    PA_11,  //D13   - LED
+    
+    //Motor Driver
+    PA_15,  //D14   - AIN1 1
+    PB_3,   //D15   - AIN2 1
+    PB_10,  //D16   - BIN1 1
+    PB_11,  //D17   - BIN2 1
+    PB_4,   //D18   - AIN1 2
+    PB_5,   //D19   - AIN2 2
+    PB_0,   //D20   - BIN1 2
+    PB_1,   //D21   - BIN2 2
+    PB_7,   //D22   - MSLEEP
+    PB_6,   //D23   - MFAULT
+    PA_4,   //D24   - DAC
     
     //IMU ISP
-    PB_12,  //D15 - SPI NSS
-    PB_15,  //D16 - SPI MOSI
-    PB_14,  //D17 - SPI MISO
-    PB_13,  //D18 - SPI SCK
-    
-    //IO PIN Head
-    PB_8,   //D19 - CAN RX,I2C SCL,Servo3
-    PB_9,   //D20 - CAN TX,I2C SDA,Servo4
-    PB_2,   //D21 - GPIO8(21) Digital Only
-    PA_8,   //D22 - A0 - GPIO1,Servo1
-    PA_7,   //D23 - A1 - GPIO2,Servo2
-    PA_6,   //D24 - A2 - GPIO3
-    PA_5,   //D25 - A3 - GPIO4,Sens1
-    PA_3,   //D26 - A4 - GPIO5,Sens2
-    PA_2,   //D27 - A5 - GPIO6,Sens3
-    PA_1,   //D28 - A6 - GPIO7,Sens4
+    PB_12,  //D25 - SPI NSS
+    PB_15,  //D26 - SPI MOSI
+    PB_14,  //D27 - SPI MISO
+    PB_13,  //D28 - SPI SCK
     
     //Battery Voltage ADC
     PA_0,   //D29 - A7 - VBAT
-    
 };
 
 // Analog (Ax) pin number array
 
 const uint32_t analogInputPin[] = {
-    
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
     29
-    /*
-    1,  //A0
-    2,  //A1
-    3,  //A2
-    4,  //A3
-    5,  //A4
-    6,  //A5
-    7   //A6
-    
-    
-  46, //A0
-  47, //A1
-  48, //A2
-  49, //A3
-  50, //A4
-  51, //A5
-  11, //A6
-  12, //A7
-  28, //A8
-  29, //A9
-  35, //A10
-  45  //A11
-  */
 };
 
 #ifdef __cplusplus
