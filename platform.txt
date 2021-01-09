@@ -175,9 +175,9 @@ tools.stm32CubeProg.upload.pattern="{path}/{cmd}" {upload.protocol} "{build.path
 # RECore upload
 tools.RECore_autoDFU.cmd=RECore_autoDFU.sh
 tools.RECore_autoDFU.cmd.windows=RECore_autoDFU.bat
-tools.RECore_autoDFU.path.linux={runtime.tools.STM32Tools.path}/tools/linux
-tools.RECore_autoDFU.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
-tools.RECore_autoDFU.path.windows={runtime.tools.STM32Tools.path}/tools/win
+tools.RECore_autoDFU.path.linux={runtime.tools.RECore-STM32-Tools.path}/linux
+tools.RECore_autoDFU.path.macosx={runtime.tools.RECore-STM32-Tools.path}/macosx
+tools.RECore_autoDFU.path.windows={runtime.tools.RECore-STM32-Tools.path}/win
 tools.RECore_autoDFU.upload.params.verbose=
 tools.RECore_autoDFU.upload.params.quiet=
 tools.RECore_autoDFU.upload.pattern="{path}/{cmd}" {upload.protocol} "{build.path}/{build.project_name}.bin" {upload.options}
