@@ -153,27 +153,27 @@ recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
 # -------------------
 
 # Upload to board via mass storage
-tools.massStorageCopy.cmd=massStorageCopy.sh
-tools.massStorageCopy.cmd.windows=massStorageCopy.bat
-tools.massStorageCopy.path={runtime.tools.STM32Tools.path}/tools/win
-tools.massStorageCopy.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
-tools.massStorageCopy.path.linux={runtime.tools.STM32Tools.path}/tools/linux
-tools.massStorageCopy.upload.params.verbose=
-tools.massStorageCopy.upload.params.quiet=
-tools.massStorageCopy.upload.pattern="{path}/{cmd}" {upload.verbose} -I "{build.path}/{build.project_name}.bin" -O "{node}"
+#tools.massStorageCopy.cmd=massStorageCopy.sh
+#tools.massStorageCopy.cmd.windows=massStorageCopy.bat
+#tools.massStorageCopy.path={runtime.tools.STM32Tools.path}/tools/win
+#tools.massStorageCopy.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
+#tools.massStorageCopy.path.linux={runtime.tools.STM32Tools.path}/tools/linux
+#tools.massStorageCopy.upload.params.verbose=
+#tools.massStorageCopy.upload.params.quiet=
+#tools.massStorageCopy.upload.pattern="{path}/{cmd}" {upload.verbose} -I "{build.path}/{build.project_name}.bin" -O "{node}"
 
 # STM32CubeProgrammer upload
-tools.stm32CubeProg.cmd=stm32CubeProg.sh
-tools.stm32CubeProg.cmd.windows=stm32CubeProg.bat
-tools.stm32CubeProg.path.linux={runtime.tools.STM32Tools.path}/tools/linux
-tools.stm32CubeProg.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
-tools.stm32CubeProg.path.windows={runtime.tools.STM32Tools.path}/tools/win
-tools.stm32CubeProg.upload.params.verbose=
-tools.stm32CubeProg.upload.params.quiet=
-tools.stm32CubeProg.upload.pattern="{path}/{cmd}" {upload.protocol} "{build.path}/{build.project_name}.bin" {upload.options}
+#tools.stm32CubeProg.cmd=stm32CubeProg.sh
+#tools.stm32CubeProg.cmd.windows=stm32CubeProg.bat
+#tools.stm32CubeProg.path.linux={runtime.tools.STM32Tools.path}/tools/linux
+#tools.stm32CubeProg.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
+#tools.stm32CubeProg.path.windows={runtime.tools.STM32Tools.path}/tools/win
+#tools.stm32CubeProg.upload.params.verbose=
+#tools.stm32CubeProg.upload.params.quiet=
+#tools.stm32CubeProg.upload.pattern="{path}/{cmd}" {upload.protocol} "{build.path}/{build.project_name}.bin" {upload.options}
 
 # RECore upload
-tools.RECore_autoDFU.cmd=RECore_autoDFU.sh
+tools.RECore_autoDFU.cmd=recore_dfu_write.sh
 tools.RECore_autoDFU.cmd.windows=recore_dfu_write.bat
 tools.RECore_autoDFU.path.linux={runtime.tools.RECore-STM32-Tools.path}/linux
 tools.RECore_autoDFU.path.macosx={runtime.tools.RECore-STM32-Tools.path}/macosx
