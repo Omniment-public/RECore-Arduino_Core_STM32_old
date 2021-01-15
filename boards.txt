@@ -1723,10 +1723,10 @@ menu.upload_method=Upload method
 # OMNIMENT RECORE BOARD
 # recore board
 
-recore_f072.name=Recore Board
+recore_f072.name=RECore
 recore_f072.build.core=arduino
 
-recore_f072.menu.pnum.RECORE_F072=STM32F072 Recore Board
+recore_f072.menu.pnum.RECORE_F072=RECore
 recore_f072.menu.pnum.RECORE_F072.upload.maximum_data_size=16384
 recore_f072.menu.pnum.RECORE_F072.upload.maximum_size=65536
 
@@ -1742,14 +1742,14 @@ recore_f072.menu.pnum.RECORE_F072.build.extra_flags=-D{build.product_line} {buil
 recore_f072.menu.upload_method.AutoDFUMethod=AutoDFU (Serial)
 recore_f072.menu.upload_method.AutoDFUMethod.upload.protocol=0
 recore_f072.menu.upload_method.AutoDFUMethod.upload.options={serial.port.file} -s
-recore_f072.menu.upload_method.AutoDFUMethod.upload.tool=RECore_autoDFU
+recore_f072.menu.upload_method.AutoDFUMethod.upload.tool=recore_dfu_write
 
-recore_f072.menu.upload_method.swdMethod=STM32CubeProgrammer (SWD)
-recore_f072.menu.upload_method.swdMethod.upload.protocol=1
-recore_f072.menu.upload_method.swdMethod.upload.options=-g
-recore_f072.menu.upload_method.swdMethod.upload.tool=RECore_autoDFU
-
-recore_f072.menu.upload_method.serialMethod=STM32CubeProgrammer (Serial)
-recore_f072.menu.upload_method.serialMethod.upload.protocol=2
-recore_f072.menu.upload_method.serialMethod.upload.options={serial.port.file} -s
-recore_f072.menu.upload_method.serialMethod.upload.tool=RECore_autoDFU
+#recore_f072.menu.upload_method.swdMethod=STM32CubeProgrammer (SWD)
+#recore_f072.menu.upload_method.swdMethod.upload.protocol=1
+#recore_f072.menu.upload_method.swdMethod.upload.options=-g
+#recore_f072.menu.upload_method.swdMethod.upload.tool=RECore_autoDFU
+#
+#recore_f072.menu.upload_method.serialMethod=STM32CubeProgrammer (Serial)
+#recore_f072.menu.upload_method.serialMethod.upload.protocol=2
+#recore_f072.menu.upload_method.serialMethod.upload.options={serial.port.file} -s
+#recore_f072.menu.upload_method.serialMethod.upload.tool=RECore_autoDFU
