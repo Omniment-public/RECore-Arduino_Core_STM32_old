@@ -86,53 +86,114 @@ const uint32_t analogInputPin[] = {
 
 // ----------------------------------------------------------------------------
 
+//pin name define
+#define SW_Pin GPIO_PIN_12
+#define SW_GPIO_Port GPIOA
+#define LED_Pin GPIO_PIN_11
+#define LED_GPIO_Port GPIOA
+
 #ifdef __cplusplus
 extern "C" {
-#endif
+    #endif
+    WEAK void initVariant(void)
+    {
+        //set pin input sw
+        GPIO_InitTypeDef GPIO_InitStruct = {0};
+        /* GPIO Ports Clock Enable */
+        __HAL_RCC_GPIOF_CLK_ENABLE();
+        __HAL_RCC_GPIOA_CLK_ENABLE();
+        __HAL_RCC_GPIOB_CLK_ENABLE();
+        
+        GPIO_InitStruct.Pin = SW_Pin;
+        GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+        GPIO_InitStruct.Pull = GPIO_PULLUP;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        HAL_GPIO_Init(SW_GPIO_Port, &GPIO_InitStruct);
+        
+        GPIO_InitStruct.Pin = LED_Pin;
+        GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        HAL_GPIO_Init(SW_GPIO_Port, &GPIO_InitStruct);
+        
+        //safe start
+        bool pin_togle_status = false;
+        bool exit_soft_start = false;
+        
+        bool fade_dir = true;
+        uint16_t duty_delay = 0;
+        uint8_t pwm_count = 0;
+        uint8_t pwm_duty = 0;
+        
+        while(!exit_soft_start){
+            if( HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == GPIO_PIN_RESET){
+                pin_togle_status = true;
+            }else if( (HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == GPIO_PIN_SET) & pin_togle_status ){
+                exit_soft_start = true;
+            }
+            
+            if(pwm_count >= pwm_duty){
+                HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_SET);
+            }else{
+                HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
+            }
+            pwm_count++;
+            
+            if(duty_delay > 1500){
+                if(fade_dir){
+                    pwm_duty++;
+                    if(pwm_duty == 255){
+                        fade_dir = false;
+                    }
+                }else{
+                    pwm_duty--;
+                    if(pwm_duty == 0){
+                        fade_dir = true;
+                    }
+                }
+                duty_delay = 0;
+            }else{
+                duty_delay++;
+            }
+            
+        }
+        
+        HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
+        
+    }
 
+    /**
+      * @brief  System Clock Configuration
+      * @param  None
+      * @retval None
+      */
+    WEAK void SystemClock_Config(void)
+    {
+        RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+        RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+        RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+        
+        RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI14|RCC_OSCILLATORTYPE_HSI48;
+        RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
+        RCC_OscInitStruct.HSI14State = RCC_HSI14_ON;
+        RCC_OscInitStruct.HSI14CalibrationValue = 16;
+        RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+        HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
-WEAK void initVariant(void)
-{
-  /* In DISCO_F413ZH board, Arduino connector and Wifi embeded module are sharing the same SPI pins */
-  /* We need to set the default SPI SS pin for the Wifi module to the inactive state i.e. 1 */
-  /* See board User Manual: WIFI_SPI_CS = PG_11*/
-    /*
-  __HAL_RCC_GPIOG_CLK_ENABLE();
-  GPIO_InitTypeDef  GPIO_InitStruct;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
-  GPIO_InitStruct.Pin = GPIO_PIN_11;
-  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
-  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_11, GPIO_PIN_SET);
-  */
-    //HAL_GPIO_Init(GPIO)
-  //pinMode(12, INPUT_PULLUP);
-}
-    
-/**
-  * @brief  System Clock Configuration
-  * @param  None
-  * @retval None
-  */
-WEAK void SystemClock_Config(void)
-{
-  RCC_OscInitTypeDef RCC_OscInitStruct;
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+        RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                                    |RCC_CLOCKTYPE_PCLK1;
+        RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI48;
+        RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+        RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+        
+        HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1);
 
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48;
-  RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-  HAL_RCC_OscConfig(&RCC_OscInitStruct);
+        PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1;
+        PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK1;
+        HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
+        
+    }
 
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
-                                | RCC_CLOCKTYPE_PCLK1;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI48;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1);
-}
-
-#ifdef __cplusplus
+    #ifdef __cplusplus
 }
 #endif
