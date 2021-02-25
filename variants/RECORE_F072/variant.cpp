@@ -121,7 +121,7 @@ extern "C" {
         bool exit_soft_start = false;
         
         bool fade_dir = true;
-        uint16_t duty_delay = 0;
+        uint16_t fade_delay = 0;
         uint8_t pwm_count = 0;
         uint8_t pwm_duty = 0;
         
@@ -132,14 +132,14 @@ extern "C" {
                 exit_soft_start = true;
             }
             
-            if(pwm_count >= pwm_duty){
+            if(pwm_count <= pwm_duty){
                 HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_SET);
             }else{
                 HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
             }
             pwm_count++;
             
-            if(duty_delay > 1500){
+            if(fade_delay > 1500){
                 if(fade_dir){
                     pwm_duty++;
                     if(pwm_duty == 255){
@@ -151,9 +151,9 @@ extern "C" {
                         fade_dir = true;
                     }
                 }
-                duty_delay = 0;
+                fade_delay = 0;
             }else{
-                duty_delay++;
+                fade_delay++;
             }
             
         }
