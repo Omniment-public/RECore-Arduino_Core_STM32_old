@@ -174,11 +174,11 @@ recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
 #tools.stm32CubeProg.upload.pattern="{path}/{cmd}" {upload.protocol} "{build.path}/{build.project_name}.bin" {upload.options}
 
 # RECore upload
-tools.RECore_autoDFU.cmd=recore_dfu_write.sh
-tools.RECore_autoDFU.cmd.windows=recore_dfu_write.bat
-tools.RECore_autoDFU.path.linux={runtime.tools.RECore-STM32-Tools.path}/linux
-tools.RECore_autoDFU.path.macosx={runtime.tools.RECore-STM32-Tools.path}/macosx
-tools.RECore_autoDFU.path.windows={runtime.tools.RECore-STM32-Tools.path}/win
-tools.RECore_autoDFU.upload.params.verbose=
-tools.RECore_autoDFU.upload.params.quiet=
-tools.RECore_autoDFU.upload.pattern="{path}/{cmd}" {upload.protocol} "{serial.port}" "{build.path}/{build.project_name}.bin" {upload.options}
+tools.recore_dfu_write.cmd=recore_dfu_write.sh
+tools.recore_dfu_write.cmd.windows=recore_dfu_write.bat
+tools.recore_dfu_write.path.linux={runtime.tools.RECore-STM32-Tools.path}/linux
+tools.recore_dfu_write.path.macosx={runtime.tools.RECore-STM32-Tools.path}/macosx
+tools.recore_dfu_write.path.windows={runtime.tools.RECore-STM32-Tools.path}/win
+tools.recore_dfu_write.upload.params.verbose=
+tools.recore_dfu_write.upload.params.quiet=
+tools.recore_dfu_write.upload.pattern="{path}/{cmd}" {upload.protocol} "{serial.port}" "{build.path}/{build.project_name}.bin" {upload.options}
