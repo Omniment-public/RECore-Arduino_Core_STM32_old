@@ -14,10 +14,15 @@
 
 #include "RECoreMotorDriver.h"
 
-void RECoreMotorDriver::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num){
+//Stepper stm_a(200, 14,15,16,17);
+//Stepper stm_b(200, 18,19,20,21);
+
+void RECoreMotorDriver::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps){
+    //disable driver
     digitalWrite(driver_pin_array[8],0);
+    
     if(set_driver_unit == 0){
-        if(set_motor_type_num == 0 | set_motor_type_num == 2){
+        if(set_motor_type_num == 0){// | set_motor_type_num == 2){
             //single dc
             for(int i = 0; i < 4; i++){
                 digitalWrite(driver_pin_array[i],0);
@@ -29,9 +34,11 @@ void RECoreMotorDriver::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_
             pinMode(driver_pin_array[1],OUTPUT_OPEN_DRAIN);
             digitalWrite(driver_pin_array[2],0);
             digitalWrite(driver_pin_array[3],0);
+        }else if(set_motor_type_num == 2){
+            stm_a = new Stepper(stm_steps, driver_pin_array[0], driver_pin_array[1], driver_pin_array[2], driver_pin_array[3]);
         }
     }else if(set_driver_unit == 1){
-        if(set_motor_type_num == 0 | set_motor_type_num == 2){
+        if(set_motor_type_num == 0){// | set_motor_type_num == 2){
             //single dc
             for(int i = 0; i < 4; i++){
                 digitalWrite(driver_pin_array[i+4],0);
@@ -43,11 +50,15 @@ void RECoreMotorDriver::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_
             pinMode(driver_pin_array[5],OUTPUT_OPEN_DRAIN);
             digitalWrite(driver_pin_array[6],0);
             digitalWrite(driver_pin_array[7],0);
+        }else if(set_motor_type_num == 2){
+            stm_b = new Stepper(stm_steps, driver_pin_array[4], driver_pin_array[5], driver_pin_array[6], driver_pin_array[7]);
         }
     }else{
         return;
     }
+    //enable driver
     digitalWrite(driver_pin_array[8],1);
+
     driver_mode[set_driver_unit] = set_motor_type_num;
 }
 
@@ -63,22 +74,12 @@ void RECoreMotorDriver::setMotorCurrent(float set_motor_current){
     //8bit dac 0-255 1.98/(3.3/256)
     float calc_dac_const = 153.6;
 
-    //float calc_dac = set_motor_current * calc_dac_const;
-    //uint16_t calc_dac_16 = uint16_t(calc_dac);
-
-    calc_dac = set_motor_current * calc_dac_const;
-    calc_dac_16 = uint16_t(calc_dac);
-
+    float calc_dac = set_motor_current * calc_dac_const;
+    uint16_t calc_dac_16 = uint16_t(calc_dac);
+    
     analogWrite(driver_pin_array[10], calc_dac);
     motor_current = set_motor_current;
     return;
-}
-
-float RECoreMotorDriver::get_current_value(){
-    return calc_dac;
-}
-uint16_t RECoreMotorDriver::get_current_16(){
-    return calc_dac_16;
 }
 
 void RECoreMotorDriver::setBrakeType(uint8_t set_motor_num, uint8_t set_brake_type){
@@ -91,7 +92,6 @@ void RECoreMotorDriver::setMotorSpeed(uint8_t set_motor_num, float set_motor_spe
     uint8_t control_motor_pair_num = set_motor_num * 2;
     analogWrite(driver_pin_array[control_motor_pair_num], motor_pwm_value[control_motor_pair_num]);
     analogWrite(driver_pin_array[control_motor_pair_num + 1], motor_pwm_value[control_motor_pair_num + 1]);
-
 }
 
 void RECoreMotorDriver::presetMotorSpeed(uint8_t set_motor_num, float set_motor_speed){
@@ -142,7 +142,32 @@ void RECoreMotorDriver::presetMotorSpeed(uint8_t set_motor_num, float set_motor_
     return;
 }
 
-//void RECoreMotorDriver::runMotor(uint8_t set_motor_num);
+
+void RECoreMotorDriver::setStep(uint8_t set_driver_unit, uint16_t set_step_count){
+    if(set_driver_unit == 0 && driver_mode[0] == 2){
+        stm_a -> step(set_step_count);
+    }else if(set_driver_unit == 1 && driver_mode[1] == 2){
+        stm_b -> step(set_step_count);
+    }else{
+        return;
+    }
+}
+
+void RECoreMotorDriver::presetSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed){
+    if(set_driver_unit == 0 && driver_mode[0] == 2){
+        stm_a -> setSpeed(set_motor_speed);
+    }else if(set_driver_unit == 1 && driver_mode[1] == 2){
+        stm_b -> setSpeed(set_motor_speed);
+    }else{
+        return;
+    }
+}
+
+void RECoreMotorDriver::runMotor(uint8_t set_motor_num){
+    //analogWrite(driver_pin_array[control_motor_pair_num], motor_pwm_value[control_motor_pair_num]);
+    //analogWrite(driver_pin_array[control_motor_pair_num + 1], motor_pwm_value[control_motor_pair_num + 1]);
+}
+
 //void RECoreMotorDriver::stopMotor(uint8_t set_motor_num);
 //bool RECoreMotorDriver::getMotorFault();
 //void RECoreMotorDriver::setSleep();

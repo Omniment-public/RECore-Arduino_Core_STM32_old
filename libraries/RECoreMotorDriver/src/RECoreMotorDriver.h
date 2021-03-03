@@ -12,8 +12,14 @@
 #define single_dc   0
 #define parallel_dc 1
 #define stepping    2
-#define unitA 0
-#define unitB 1
+
+#define unit_a 0
+#define unit_b 1
+
+#define coast 0
+#define brake 1
+
+#include <Stepper.h>
 
 class RECoreMotorDriver{
     public:
@@ -34,10 +40,6 @@ class RECoreMotorDriver{
             //driver sleep
             digitalWrite(driver_pin_array[8],0);
 
-            //init driver mode
-            setMotorType(0,0);
-            setMotorType(1,0);
-
             //init motorcurrent;
             setMotorCurrent(0);
 
@@ -49,7 +51,7 @@ class RECoreMotorDriver{
             analogWriteFrequency(25000);
         }
 
-        void setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num);
+        void setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps = 200);
         void setMotorCurrent(float set_motor_current);
         void setBrakeType(uint8_t set_motor_num, uint8_t set_brake_type);
         
@@ -58,23 +60,25 @@ class RECoreMotorDriver{
         void presetMotorSpeed(uint8_t set_motor_num, float set_motor_speed);
         void presetMotorSpeedRaw(uint8_t set_motor_num, int set_motor_speed);
 
+        void setStep(uint8_t set_driver_unit, uint16_t set_step_count);
+        void presetSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed);
+
         void runMotor(uint8_t set_motor_num = 0);
         void stopMotor(uint8_t set_motor_num = 0);
         bool getMotorFault();
         void setSleep();
         int getMotorSpeed(uint8_t get_motor_num);
 
-        float get_current_value();
-        uint16_t get_current_16();
     private:
+        Stepper* stm_a;
+        Stepper* stm_b;
+
         uint8_t driver_pin_array[11];
         uint8_t driver_mode[2];
         float motor_current;
         uint8_t brake_mode[4];
         uint8_t motor_pwm_value[8];
 
-        uint16_t calc_dac_16;
-        float calc_dac;
 };
 
 #endif
