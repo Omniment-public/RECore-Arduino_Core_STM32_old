@@ -1,3 +1,4 @@
+
 /*
     RECoreLibrary.cpp - RECore onboard Function library
     Copyright (c) 2021 Omniment Inc. All right reserved.
@@ -12,6 +13,4 @@
 
 #include "RECoreLibrary.h"
 
-
 #endif // ARDUINO_ARCH_STM32
-

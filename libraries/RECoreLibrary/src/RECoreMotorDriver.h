@@ -66,7 +66,7 @@ class RECoreMotorDriver{
         void runMotor(uint8_t set_motor_num = 0);
         void stopMotor(uint8_t set_motor_num = 0);
         bool getMotorFault();
-        void setSleep();
+        void setSleep(bool pin_state);
         int getMotorSpeed(uint8_t get_motor_num);
 
     private:
