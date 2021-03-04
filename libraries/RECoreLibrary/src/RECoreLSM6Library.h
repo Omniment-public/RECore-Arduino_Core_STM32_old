@@ -15,13 +15,8 @@
 class RECoreLSM6Library{
     public:
         
-        RECoreLSM6Library()
-        {
-            
-            init();
-        }
+        RECoreLSM6Library();
         
-        void init();
         float getAccX();
         float getAccY();
         float getAccZ();
@@ -34,12 +29,9 @@ class RECoreLSM6Library{
 
         void send_spi_data(uint8_t send_data, bool wr);
         void receive_spi_data(uint8_t* receive_data, uint8_t len);
-
-        bool get_comp();
-
     private:
+        void init();
         SPIClass* SPI_2;
-        bool init_comp;
 };
 
 #endif
