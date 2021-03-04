@@ -61,7 +61,7 @@ class RECoreMotorDriver{
         void presetMotorSpeedRaw(uint8_t set_motor_num, int set_motor_speed);
 
         void setStep(uint8_t set_driver_unit, uint16_t set_step_count);
-        void presetSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed);
+        void setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed);
 
         void runMotor(uint8_t set_motor_num = 0);
         void stopMotor(uint8_t set_motor_num = 0);
@@ -73,7 +73,14 @@ class RECoreMotorDriver{
         Stepper* stm_a;
         Stepper* stm_b;
 
+        //pin array
+        //0-3 unit a
+        //4-7 unit b
+        //8 sleep
+        //9 fault
+        //10 vref
         uint8_t driver_pin_array[11];
+        
         uint8_t driver_mode[2];
         float motor_current;
         uint8_t brake_mode[4];

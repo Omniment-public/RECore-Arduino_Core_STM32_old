@@ -9,18 +9,13 @@
 #if defined(ARDUINO_ARCH_STM32)
 
 #include <Arduino.h>
-#include <Servo.h>
-#include <HardwareTimer.h>
 
 #include "RECoreMotorDriver.h"
-
-//Stepper stm_a(200, 14,15,16,17);
-//Stepper stm_b(200, 18,19,20,21);
 
 void RECoreMotorDriver::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps){
     //disable driver
     digitalWrite(driver_pin_array[8],0);
-    
+
     if(set_driver_unit == 0){
         if(set_motor_type_num == 0){// | set_motor_type_num == 2){
             //single dc
@@ -88,10 +83,7 @@ void RECoreMotorDriver::setBrakeType(uint8_t set_motor_num, uint8_t set_brake_ty
 
 void RECoreMotorDriver::setMotorSpeed(uint8_t set_motor_num, float set_motor_speed){
     presetMotorSpeed(set_motor_num, set_motor_speed);
-    
-    uint8_t control_motor_pair_num = set_motor_num * 2;
-    analogWrite(driver_pin_array[control_motor_pair_num], motor_pwm_value[control_motor_pair_num]);
-    analogWrite(driver_pin_array[control_motor_pair_num + 1], motor_pwm_value[control_motor_pair_num + 1]);
+    runMotor(set_motor_num);
 }
 
 void RECoreMotorDriver::presetMotorSpeed(uint8_t set_motor_num, float set_motor_speed){
@@ -114,6 +106,7 @@ void RECoreMotorDriver::presetMotorSpeed(uint8_t set_motor_num, float set_motor_
 
     //chk motor type
     uint8_t target_driver_unit = 0;
+
     if(set_motor_num >= 2){
         target_driver_unit = 1;
     }
@@ -142,7 +135,6 @@ void RECoreMotorDriver::presetMotorSpeed(uint8_t set_motor_num, float set_motor_
     return;
 }
 
-
 void RECoreMotorDriver::setStep(uint8_t set_driver_unit, uint16_t set_step_count){
     if(set_driver_unit == 0 && driver_mode[0] == 2){
         stm_a -> step(set_step_count);
@@ -153,7 +145,7 @@ void RECoreMotorDriver::setStep(uint8_t set_driver_unit, uint16_t set_step_count
     }
 }
 
-void RECoreMotorDriver::presetSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed){
+void RECoreMotorDriver::setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed){
     if(set_driver_unit == 0 && driver_mode[0] == 2){
         stm_a -> setSpeed(set_motor_speed);
     }else if(set_driver_unit == 1 && driver_mode[1] == 2){
@@ -164,13 +156,38 @@ void RECoreMotorDriver::presetSteppingSpeed(uint8_t set_driver_unit, uint16_t se
 }
 
 void RECoreMotorDriver::runMotor(uint8_t set_motor_num){
-    //analogWrite(driver_pin_array[control_motor_pair_num], motor_pwm_value[control_motor_pair_num]);
-    //analogWrite(driver_pin_array[control_motor_pair_num + 1], motor_pwm_value[control_motor_pair_num + 1]);
+    //chk motor type
+    uint8_t target_driver_unit = 0;
+    
+    if(set_motor_num >= 2){
+        target_driver_unit = 1;
+    }
+
+    if(driver_mode[target_driver_unit] == 1){
+        //parallel
+        if(set_motor_num == 0 | set_motor_num == 2){
+            set_motor_num + 1;
+        }
+    }else if(driver_mode[target_driver_unit] == 2){
+        //stepper
+        return;
+    }
+
+    uint8_t control_motor_pair_num = set_motor_num * 2;
+    analogWrite(driver_pin_array[control_motor_pair_num], motor_pwm_value[control_motor_pair_num]);
+    analogWrite(driver_pin_array[control_motor_pair_num + 1], motor_pwm_value[control_motor_pair_num + 1]);
 }
 
 //void RECoreMotorDriver::stopMotor(uint8_t set_motor_num);
-//bool RECoreMotorDriver::getMotorFault();
-//void RECoreMotorDriver::setSleep();
+
+bool RECoreMotorDriver::getMotorFault(){
+    return digitalRead(driver_pin_array[9]);
+}
+
+void RECoreMotorDriver::setSleep(bool pin_state){
+    digitalWrite(driver_pin_array[8],pin_state);
+}
+
 //int RECoreMotorDriver::getMotorSpeed(uint8_t get_motor_num);
 
 #endif // ARDUINO_ARCH_STM32
