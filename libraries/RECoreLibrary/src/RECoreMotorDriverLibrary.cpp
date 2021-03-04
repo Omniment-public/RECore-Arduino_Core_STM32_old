@@ -1,5 +1,5 @@
 /*
-    RECoreMotorDriver.cpp - RECore onboard DRV8848 library
+    RECoreMotorDriverLibrary.cpp - RECore onboard DRV8848 library
     Copyright (c) 2021 Omniment Inc. All right reserved.
     
     MIT License
@@ -10,9 +10,9 @@
 
 #include <Arduino.h>
 
-#include "RECoreMotorDriver.h"
+#include "RECoreMotorDriverLibrary.h"
 
-void RECoreMotorDriver::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps){
+void RECoreMotorDriverLibrary::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps){
     //disable driver
     digitalWrite(driver_pin_array[8],0);
 
@@ -57,7 +57,7 @@ void RECoreMotorDriver::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_
     driver_mode[set_driver_unit] = set_motor_type_num;
 }
 
-void RECoreMotorDriver::setMotorCurrent(float set_motor_current){
+void RECoreMotorDriverLibrary::setMotorCurrent(float set_motor_current){
     if(set_motor_current > 1.5 | set_motor_current < 0){
         return;
     }
@@ -77,16 +77,16 @@ void RECoreMotorDriver::setMotorCurrent(float set_motor_current){
     return;
 }
 
-void RECoreMotorDriver::setBrakeType(uint8_t set_motor_num, uint8_t set_brake_type){
+void RECoreMotorDriverLibrary::setBrakeType(uint8_t set_motor_num, uint8_t set_brake_type){
     brake_mode[set_motor_num] = set_brake_type;
 }
 
-void RECoreMotorDriver::setMotorSpeed(uint8_t set_motor_num, float set_motor_speed){
+void RECoreMotorDriverLibrary::setMotorSpeed(uint8_t set_motor_num, float set_motor_speed){
     presetMotorSpeed(set_motor_num, set_motor_speed);
     runMotor(set_motor_num);
 }
 
-void RECoreMotorDriver::presetMotorSpeed(uint8_t set_motor_num, float set_motor_speed){
+void RECoreMotorDriverLibrary::presetMotorSpeed(uint8_t set_motor_num, float set_motor_speed){
     //chk over set speed
     if(set_motor_speed > 1.0 | set_motor_speed < -1.0){
         return;
@@ -135,7 +135,7 @@ void RECoreMotorDriver::presetMotorSpeed(uint8_t set_motor_num, float set_motor_
     return;
 }
 
-void RECoreMotorDriver::setStep(uint8_t set_driver_unit, uint16_t set_step_count){
+void RECoreMotorDriverLibrary::setStep(uint8_t set_driver_unit, uint16_t set_step_count){
     if(set_driver_unit == 0 && driver_mode[0] == 2){
         stm_a -> step(set_step_count);
     }else if(set_driver_unit == 1 && driver_mode[1] == 2){
@@ -145,7 +145,7 @@ void RECoreMotorDriver::setStep(uint8_t set_driver_unit, uint16_t set_step_count
     }
 }
 
-void RECoreMotorDriver::setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed){
+void RECoreMotorDriverLibrary::setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed){
     if(set_driver_unit == 0 && driver_mode[0] == 2){
         stm_a -> setSpeed(set_motor_speed);
     }else if(set_driver_unit == 1 && driver_mode[1] == 2){
@@ -155,7 +155,7 @@ void RECoreMotorDriver::setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_m
     }
 }
 
-void RECoreMotorDriver::runMotor(uint8_t set_motor_num){
+void RECoreMotorDriverLibrary::runMotor(uint8_t set_motor_num){
     //chk motor type
     uint8_t target_driver_unit = 0;
     
@@ -178,16 +178,16 @@ void RECoreMotorDriver::runMotor(uint8_t set_motor_num){
     analogWrite(driver_pin_array[control_motor_pair_num + 1], motor_pwm_value[control_motor_pair_num + 1]);
 }
 
-//void RECoreMotorDriver::stopMotor(uint8_t set_motor_num);
+//void RECoreMotorDriverLibrary::stopMotor(uint8_t set_motor_num);
 
-bool RECoreMotorDriver::getMotorFault(){
+bool RECoreMotorDriverLibrary::getMotorFault(){
     return digitalRead(driver_pin_array[9]);
 }
 
-void RECoreMotorDriver::setSleep(bool pin_state){
+void RECoreMotorDriverLibrary::setSleep(bool pin_state){
     digitalWrite(driver_pin_array[8],pin_state);
 }
 
-//int RECoreMotorDriver::getMotorSpeed(uint8_t get_motor_num);
+//int RECoreMotorDriverLibrary::getMotorSpeed(uint8_t get_motor_num);
 
 #endif // ARDUINO_ARCH_STM32

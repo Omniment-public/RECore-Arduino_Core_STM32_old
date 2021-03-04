@@ -1,13 +1,13 @@
 /*
-    RECoreMotorDriver.h - RECore onboard DRV8848 library
+    RECoreMotorDriverLibrary.h - RECore onboard DRV8848 library
     Copyright (c) 2021 Omniment Inc. All right reserved.
     
     MIT License
     
 */
 
-#ifndef RECoreMotorDriver_h
-#define RECoreMotorDriver_h
+#ifndef RECoreMotorDriverLibrary_h
+#define RECoreMotorDriverLibrary_h
 
 #define single_dc   0
 #define parallel_dc 1
@@ -21,9 +21,9 @@
 
 #include <Stepper.h>
 
-class RECoreMotorDriver{
+class RECoreMotorDriverLibrary{
     public:
-        RECoreMotorDriver(){
+        RECoreMotorDriverLibrary(){
             for(int i = 0; i < 11; i++){
                 driver_pin_array[i] = i + 14;
             }

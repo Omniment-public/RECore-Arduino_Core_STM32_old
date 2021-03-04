@@ -1,0 +1,64 @@
+#######################################
+# Syntax Coloring Map RECoreLibrary
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+# Aux Func
+getBatteryVoltage	KEYWORD2
+getMcuTemp	KEYWORD2
+
+# Motor Lib
+setMotorType	KEYWORD2
+setMotorCurrent	KEYWORD2
+setBrakeType	KEYWORD2
+setMotorSpeed	KEYWORD2
+setMotorSpeedRaw	KEYWORD2
+presetMotorSpeed	KEYWORD2
+presetMotorSpeedRaw	KEYWORD2
+setStep KEYWORD2
+setSteppingSpeed	KEYWORD2
+runMotor	KEYWORD2
+stopMotor	KEYWORD2
+getMotorFault	KEYWORD2
+setSleep	KEYWORD2
+getMotorSpeed	KEYWORD2
+
+# LSM6 Lib
+getAccX	KEYWORD2
+getAccY	KEYWORD2
+getAccZ	KEYWORD2
+getAngularAccX	KEYWORD2
+getAngularAccY	KEYWORD2
+getAngularAccZ	KEYWORD2
+getTemp	KEYWORD2
+send_spi_data	KEYWORD2
+receive_spi_data	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+RECoreLibrary	KEYWORD2
+RECoreMotorDriverLibrary	KEYWORD2
+RECoreAuxFuncLibrary	KEYWORD2
+RECoreLSM6Library	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+single_dc	LITERAL1
+parallel_dc	LITERAL1
+stepping	LITERAL1
+unit_a	LITERAL1
+unit_b	LITERAL1
+coast	LITERAL1
+brake	LITERAL1
