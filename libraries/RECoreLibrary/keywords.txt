@@ -32,15 +32,33 @@ setSleep	KEYWORD2
 getMotorSpeed	KEYWORD2
 
 # LSM6 Lib
+getRawAccX	KEYWORD2
+getRawAccY	KEYWORD2
+getRawAccZ	KEYWORD2
 getAccX	KEYWORD2
 getAccY	KEYWORD2
 getAccZ	KEYWORD2
+getRawAngularAccX	KEYWORD2
+getRawAngularAccY	KEYWORD2
+getRawAngularAccZ	KEYWORD2
 getAngularAccX	KEYWORD2
 getAngularAccY	KEYWORD2
 getAngularAccZ	KEYWORD2
 getTemp	KEYWORD2
-send_spi_data	KEYWORD2
-receive_spi_data	KEYWORD2
+getAccScale	KEYWORD2
+getAccScaleConstant	KEYWORD2
+getAngularAccScale	KEYWORD2
+getAngularAccScaleConstant	KEYWORD2
+
+get_multibyte_data	KEYWORD2
+get_singlebyte_data	KEYWORD2
+write_singlebyte_data	KEYWORD2
+
+setAccRate	KEYWORD2
+setAccScale	KEYWORD2
+setAccLpfBandwith	KEYWORD2
+setAngularAccRate	KEYWORD2
+setAngularAccScale	KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)

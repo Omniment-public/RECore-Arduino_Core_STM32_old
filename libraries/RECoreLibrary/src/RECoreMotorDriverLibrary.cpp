@@ -63,11 +63,11 @@ void RECoreMotorDriverLibrary::setMotorCurrent(float set_motor_current){
     }
     
     //calc current to DAC value
-    //12bit dac 0-4095 1.98/(3.3/4096)
-    //float calc_dac_const = 2457.6;
+    //12bit dac 0-4095 1.98/(3.3/4095)
+    //float calc_dac_const = 2457.0;
     
-    //8bit dac 0-255 1.98/(3.3/256)
-    float calc_dac_const = 153.6;
+    //8bit dac 0-255 1.98/(3.3/255)
+    float calc_dac_const = 153.0;
 
     float calc_dac = set_motor_current * calc_dac_const;
     uint16_t calc_dac_16 = uint16_t(calc_dac);
