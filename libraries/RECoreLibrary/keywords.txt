@@ -27,7 +27,7 @@ setMotorSpeed	KEYWORD2
 setDrivePwm	KEYWORD2
 presetMotorSpeed	KEYWORD2
 presetDrivePwm	KEYWORD2
-setStep	KEYWORD2
+setSteps	KEYWORD2
 setSteppingSpeed	KEYWORD2
 runMotor	KEYWORD2
 stopMotor	KEYWORD2
