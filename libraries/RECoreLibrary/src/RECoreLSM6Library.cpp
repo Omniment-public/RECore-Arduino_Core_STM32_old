@@ -21,7 +21,7 @@ void RECoreLSM6Library::init() {
     SPI_2 -> beginTransaction(SPISettings(8000000, MSBFIRST, SPI_MODE3));
     SPI_2 -> begin();
     set_acc_scale = 0;
-    set_aacc_scale = 0;
+    set_arate_scale = 0;
     pinMode(25,OUTPUT);
     digitalWrite(25,1);
 }
@@ -50,28 +50,28 @@ float RECoreLSM6Library::getAccZ(){
   return getAccScaleConstant() * getRawAccZ();
 }
 
-int16_t RECoreLSM6Library::getRawAngularAccX(){
+int16_t RECoreLSM6Library::getRawAngularRateX(){
   return get_multibyte_data(0x22);
 }
 
-int16_t RECoreLSM6Library::getRawAngularAccY(){
+int16_t RECoreLSM6Library::getRawAngularRateY(){
   return get_multibyte_data(0x24);
 }
 
-int16_t RECoreLSM6Library::getRawAngularAccZ(){
+int16_t RECoreLSM6Library::getRawAngularRateZ(){
   return get_multibyte_data(0x26);
 }
 
-float RECoreLSM6Library::getAngularAccX(){
-  return getAngularAccScaleConstant() * getRawAngularAccX();
+float RECoreLSM6Library::getAngularRateX(){
+  return getAngularRateScaleConstant() * getRawAngularRateX();
 }
 
-float RECoreLSM6Library::getAngularAccY(){
-  return getAngularAccScaleConstant() * getRawAngularAccY();
+float RECoreLSM6Library::getAngularRateY(){
+  return getAngularRateScaleConstant() * getRawAngularRateY();
 }
 
-float RECoreLSM6Library::getAngularAccZ(){
-  return getAngularAccScaleConstant() * getRawAngularAccZ();
+float RECoreLSM6Library::getAngularRateZ(){
+  return getAngularRateScaleConstant() * getRawAngularRateZ();
 }
 
 uint8_t RECoreLSM6Library::getAccScale(){
@@ -90,12 +90,12 @@ float RECoreLSM6Library::getAccScaleConstant(){
   return scale_arr[set_acc_scale];
 }
 
-uint16_t RECoreLSM6Library::getAngularAccScale(){
+uint16_t RECoreLSM6Library::getAngularRateScale(){
   uint16_t scale_arr[5] = {250,500,1000,2000,125};
   return scale_arr[set_acc_scale];
 }
 
-float RECoreLSM6Library::getAngularAccScaleConstant(){
+float RECoreLSM6Library::getAngularRateScaleConstant(){
   float scale_arr[5] = {
     0.00762962736,
     0.01525925473,
@@ -104,7 +104,7 @@ float RECoreLSM6Library::getAngularAccScaleConstant(){
     0.00381481368
     };
 
-    return scale_arr[set_aacc_scale];
+    return scale_arr[set_arate_scale];
 }
 
 int16_t RECoreLSM6Library::get_multibyte_data(uint8_t head_addr){
@@ -133,7 +133,7 @@ void RECoreLSM6Library::write_singlebyte_data(uint8_t head_addr, uint8_t set_dat
   digitalWrite(25,1); 
 }
 
-void RECoreLSM6Library::setAccRate(uint8_t set_data){
+void RECoreLSM6Library::setAccDataRate(uint8_t set_data){
   if(set_data > 0x0f){
     return;
   }
@@ -169,24 +169,24 @@ void RECoreLSM6Library::setAccLpfBandwith(uint8_t set_data){
   write_singlebyte_data(addr, make_data);
 }
 
-void RECoreLSM6Library::setAngularAccRate(uint8_t set_data){
+void RECoreLSM6Library::setAngularRateDataRate(uint8_t set_data){
   if(set_data > 0x0f){
     return;
   }
 
-  set_aacc_rate = set_data;
+  set_arate_rate = set_data;
   uint8_t addr = 0x11;
   uint8_t make_data = get_singlebyte_data(addr);
   make_data = (make_data & 0x0f) | (set_data << 4);
   write_singlebyte_data(addr, make_data);
 }
 
-void RECoreLSM6Library::setAngularAccScale(uint8_t set_data){
+void RECoreLSM6Library::setAngularRateScale(uint8_t set_data){
   if(set_data > 0x07){
     return;
   }
   
-  set_aacc_scale = set_data;
+  set_arate_scale = set_data;
   uint8_t addr = 0x11;
   uint8_t make_data = get_singlebyte_data(addr);
 

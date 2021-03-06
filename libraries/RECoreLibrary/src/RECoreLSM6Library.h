@@ -36,31 +36,31 @@ class RECoreLSM6Library{
         float getAccY();
         float getAccZ();
 
-        int16_t getRawAngularAccX();
-        int16_t getRawAngularAccY();
-        int16_t getRawAngularAccZ();
+        int16_t getRawAngularRateX();
+        int16_t getRawAngularRateY();
+        int16_t getRawAngularRateZ();
 
-        float getAngularAccX();
-        float getAngularAccY();
-        float getAngularAccZ();
+        float getAngularRateX();
+        float getAngularRateY();
+        float getAngularRateZ();
 
         float getTemp();
         
         uint8_t getAccScale();
         float getAccScaleConstant();
-        uint16_t getAngularAccScale();
-        float getAngularAccScaleConstant();
+        uint16_t getAngularRateScale();
+        float getAngularRateScaleConstant();
 
         int16_t get_multibyte_data(uint8_t head_addr);
         uint8_t get_singlebyte_data(uint8_t head_addr);
         void write_singlebyte_data(uint8_t head_addr, uint8_t set_data);
 
-        void setAccRate(uint8_t set_data);
+        void setAccDataRate(uint8_t set_data);
         void setAccScale(uint8_t set_data);
         void setAccLpfBandwith(uint8_t set_data);
 
-        void setAngularAccRate(uint8_t set_data);
-        void setAngularAccScale(uint8_t set_data);
+        void setAngularRateDataRate(uint8_t set_data);
+        void setAngularRateScale(uint8_t set_data);
 
     private:
         SPIClass* SPI_2;
@@ -73,8 +73,8 @@ class RECoreLSM6Library{
         uint8_t set_acc_rate;
         uint8_t set_acc_scale;
         uint8_t set_acc_plf_bw;
-        uint8_t set_aacc_rate;
-        uint8_t set_aacc_scale;
+        uint8_t set_arate_rate;
+        uint8_t set_arate_scale;
 
 };
 
