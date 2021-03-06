@@ -1,34 +1,86 @@
 #######################################
-# Syntax Coloring Map SPI
+# Syntax Coloring Map RECoreLibrary
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-SPI	KEYWORD1
+RECoreLibrary	KEYWORD1
+RECoreAuxFuncLibrary	KEYWORD1
+RECoreMotorDriverLibrary	KEYWORD1
+RECoreLSM6Library	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-begin	KEYWORD2
-end	KEYWORD2
-transfer	KEYWORD2
-#setBitOrder	KEYWORD2
-setDataMode	KEYWORD2
-setClockDivider	KEYWORD2
-setMISO	KEYWORD2
-setMOSI	KEYWORD2
-setSCLK	KEYWORD2
-setSSEL	KEYWORD2
+
+# Aux Func
+getBatteryVoltage	KEYWORD2
+getMcuTemp	KEYWORD2
+
+# Motor Lib
+setMotorType	KEYWORD2
+setMotorCurrent	KEYWORD2
+setBrakeMode	KEYWORD2
+setMotorSpeed	KEYWORD2
+setDrivePwm	KEYWORD2
+presetMotorSpeed	KEYWORD2
+presetDrivePwm	KEYWORD2
+setStep	KEYWORD2
+setSteppingSpeed	KEYWORD2
+runMotor	KEYWORD2
+stopMotor	KEYWORD2
+getMotorFault	KEYWORD2
+setSleep	KEYWORD2
+getMotorSpeed	KEYWORD2
+
+# LSM6 Lib
+getRawAccX	KEYWORD2
+getRawAccY	KEYWORD2
+getRawAccZ	KEYWORD2
+getAccX	KEYWORD2
+getAccY	KEYWORD2
+getAccZ	KEYWORD2
+getRawAngularRateX	KEYWORD2
+getRawAngularRateY	KEYWORD2
+getRawAngularRateZ	KEYWORD2
+getAngularRateX	KEYWORD2
+getAngularRateY	KEYWORD2
+getAngularRateZ	KEYWORD2
+getTemp	KEYWORD2
+getAccScale	KEYWORD2
+getAccScaleConstant	KEYWORD2
+getAngularRateScale	KEYWORD2
+getAngularRateScaleConstant	KEYWORD2
+
+get_multibyte_data	KEYWORD2
+get_singlebyte_data	KEYWORD2
+write_singlebyte_data	KEYWORD2
+
+setAccRate	KEYWORD2
+setAccScale	KEYWORD2
+setAccLpfBandwith	KEYWORD2
+setAngularRateDataRate	KEYWORD2
+setAngularRateScale	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+RECoreLibrary	KEYWORD2
+RECoreMotorDriverLibrary	KEYWORD2
+RECoreAuxFuncLibrary	KEYWORD2
+RECoreLSM6Library	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
-SPI_MODE0	LITERAL1
-SPI_MODE1	LITERAL1
-SPI_MODE2	LITERAL1
-SPI_MODE3	LITERAL1
 
-SPI_CONTINUE	LITERAL1
-SPI_LAST	LITERAL1
+single_dc	LITERAL1
+parallel_dc	LITERAL1
+stepping	LITERAL1
+unit_a	LITERAL1
+unit_b	LITERAL1
+coast	LITERAL1
+brake	LITERAL1

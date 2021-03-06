@@ -53,16 +53,16 @@ class RECoreMotorDriverLibrary{
 
         void setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps = 200);
         void setMotorCurrent(float set_motor_current);
-        void setBrakeType(uint8_t set_motor_num, uint8_t set_brake_type);
+        void setBrakeMode(uint8_t set_motor_num, uint8_t set_brake_type);
         
         void setMotorSpeed(uint8_t set_motor_num, float set_motor_speed);
-        void setMotorSpeedRaw(uint8_t set_motor_num, int set_motor_speed);
+        void setDrivePwm(uint8_t set_motor_num, int set_drive_pwm);
         void presetMotorSpeed(uint8_t set_motor_num, float set_motor_speed);
-        void presetMotorSpeedRaw(uint8_t set_motor_num, int set_motor_speed);
+        void presetDrivePwm(uint8_t set_motor_num, int set_drive_pwm);
 
-        void setStep(uint8_t set_driver_unit, uint16_t set_step_count);
         void setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed);
-
+        void setSteps(uint8_t set_driver_unit, int16_t set_step_count);
+        
         void runMotor(uint8_t set_motor_num = 0);
         void stopMotor(uint8_t set_motor_num = 0);
         bool getMotorFault();
