@@ -10,12 +10,15 @@
 #ifndef RECoreLibrary_h
 #define RECoreLibrary_h
 
-#include <RECoreMotorDriverLibrary.h>
 #include <RECoreAuxFuncLibrary.h>
+#include <RECoreMotorDriverLibrary.h>
+#include <RECoreLSM6Library.h>
 
-class RECoreLibrary : public RECoreMotorDriverLibrary , public RECoreAuxFuncLibrary{
+class RECoreLibrary : public RECoreAuxFuncLibrary , public RECoreMotorDriverLibrary , public RECoreLSM6Library{
     public:
-        RECoreLibrary() : RECoreMotorDriverLibrary(){}
+        RECoreLibrary() : RECoreAuxFuncLibrary() , RECoreMotorDriverLibrary() , RECoreLSM6Library(){
+            
+        }
 
     private:
 
