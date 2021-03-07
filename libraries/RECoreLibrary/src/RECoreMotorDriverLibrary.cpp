@@ -12,6 +12,12 @@
 
 #include "RECoreMotorDriverLibrary.h"
 
+//pin array
+//0-3 unit a
+//4-7 unit b
+//8 sleep
+//9 fault
+//10 vref
 const uint8_t driver_pin_array[11] = {14,15,16,17,18,19,20,21,22,23,24};
 
 void proc_steps_a(void);
@@ -72,7 +78,6 @@ void RECoreMotorDriverLibrary::setMotorType(uint8_t set_driver_unit, uint8_t set
             }
             unit_a_tim = new HardwareTimer(TIM2);
             motor_step_count[0] = stm_steps;
-            //stm_a = new Stepper(stm_steps, driver_pin_array[0], driver_pin_array[1], driver_pin_array[2], driver_pin_array[3]);
         }
     }else if(set_driver_unit == 1){
         if(set_motor_type_num == 0){
@@ -97,7 +102,6 @@ void RECoreMotorDriverLibrary::setMotorType(uint8_t set_driver_unit, uint8_t set
             }
             unit_b_tim = new HardwareTimer(TIM3);
             motor_step_count[1] = stm_steps;
-            //stm_b = new Stepper(stm_steps, driver_pin_array[4], driver_pin_array[5], driver_pin_array[6], driver_pin_array[7]);
         }
     }else{
         return;

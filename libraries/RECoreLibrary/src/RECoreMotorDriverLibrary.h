@@ -19,8 +19,6 @@
 #define coast 0
 #define brake 1
 
-#include <Stepper.h>
-
 class RECoreMotorDriverLibrary{
     public:
         RECoreMotorDriverLibrary();
@@ -44,17 +42,6 @@ class RECoreMotorDriverLibrary{
         int getMotorSpeed(uint8_t get_motor_num);
 
     private:
-        Stepper* stm_a;
-        Stepper* stm_b;
-
-        //pin array
-        //0-3 unit a
-        //4-7 unit b
-        //8 sleep
-        //9 fault
-        //10 vref
-        
-        
         uint8_t driver_mode[2];
         float motor_current;
         uint8_t brake_mode[4];
