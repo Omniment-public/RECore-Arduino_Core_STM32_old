@@ -23,8 +23,13 @@ const uint8_t driver_pin_array[11] = {14,15,16,17,18,19,20,21,22,23,24};
 void proc_steps_a(void);
 void proc_steps_b(void);
 bool stm_pattern[4][2] = {{1, 1}, {1, 0}, {0, 0}, {0, 1}};
-int32_t stepping_count[2];
-bool drive_stepping_infinity[2];
+int32_t steps_count[2];
+
+//stepping drive mode
+//false : steps
+//true : speed
+bool stepping_drive_mode[2] = {false,false};
+bool stepping_dir[2];
 HardwareTimer* unit_a_tim;
 HardwareTimer* unit_b_tim;
 
@@ -218,7 +223,7 @@ void RECoreMotorDriverLibrary::presetDrivePwm(uint8_t set_motor_num, int set_dri
     return;
 }
 
-void RECoreMotorDriverLibrary::setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed){
+void RECoreMotorDriverLibrary::setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed, bool dir){
     if(set_driver_unit > 1){
         return;
     }
@@ -226,6 +231,37 @@ void RECoreMotorDriverLibrary::setSteppingSpeed(uint8_t set_driver_unit, uint16_
         return;
     }
 
+    stepping_dir[set_driver_unit] = dir;
+    presetSteppingSpeed(set_driver_unit, set_motor_speed);
+    stepping_drive_mode[set_driver_unit] = true;
+
+    if(set_driver_unit == 0){
+        unit_a_tim -> resume();
+    }else{
+        unit_b_tim -> resume();
+    }
+}
+
+void RECoreMotorDriverLibrary::setSteppingSteps(uint8_t set_driver_unit, uint16_t set_motor_speed, int32_t set_step_count){
+    if(set_driver_unit > 1){
+        return;
+    }
+    if(driver_mode[set_driver_unit] != 2){
+        return;
+    }
+
+    presetSteppingSpeed(set_driver_unit, set_motor_speed);
+    steps_count[set_driver_unit] = set_step_count;
+    stepping_drive_mode[set_driver_unit] = false;
+
+    if(set_driver_unit == 0){
+        unit_a_tim -> resume();
+    }else{
+        unit_b_tim -> resume();
+    }
+}
+
+void RECoreMotorDriverLibrary::presetSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed){
     if(driver_mode[set_driver_unit] == 2){
         stepping_speed[set_driver_unit] = 60000000/(motor_step_count[set_driver_unit]*set_motor_speed);
         if(set_driver_unit == 0){
@@ -235,24 +271,6 @@ void RECoreMotorDriverLibrary::setSteppingSpeed(uint8_t set_driver_unit, uint16_
             unit_b_tim -> setOverflow(stepping_speed[set_driver_unit], MICROSEC_FORMAT);
             unit_b_tim -> attachInterrupt(proc_steps_b);
         }
-    }
-}
-
-void RECoreMotorDriverLibrary::setSteps(uint8_t set_driver_unit, int32_t set_step_count){
-    if(set_driver_unit > 1){
-        return;
-    }
-    if(driver_mode[set_driver_unit] != 2){
-        return;
-    }
-
-    drive_stepping_infinity[set_driver_unit] = drive_infinity;
-    stepping_count[set_driver_unit] = set_step_count;
-
-    if(set_driver_unit == 0){
-        unit_a_tim -> resume();
-    }else{
-        unit_b_tim -> resume();
     }
 }
 
@@ -282,7 +300,40 @@ void RECoreMotorDriverLibrary::runMotor(uint8_t set_motor_num){
 void proc_steps_a(void){
     static int8_t step_index = 0;
 
-    if(stepping_count[0] == 0 && !drive_stepping_infinity[0]){
+    digitalWrite(driver_pin_array[0],stm_pattern[step_index][0]);
+    digitalWrite(driver_pin_array[1],!stm_pattern[step_index][0]);
+    digitalWrite(driver_pin_array[2],stm_pattern[step_index][1]);
+    digitalWrite(driver_pin_array[3],!stm_pattern[step_index][1]);
+
+    if(stepping_drive_mode[0] == false){
+        //steps
+        if(steps_count[0] == 0){
+            unit_a_tim -> pause();
+        }else{
+            if(steps_count[0] > 0){
+                steps_count[0]--;
+                step_index++;
+            }else{
+                steps_count[0]++;
+                step_index--;
+            }
+        }
+    }else{
+        //speed
+        if(!stepping_dir[0]){
+            step_index++;
+        }else{
+            step_index--;
+        }
+    }
+
+    if(step_index > 3){
+        step_index = 0;
+    }else if(step_index < 0){
+        step_index = 3;
+    }
+/*
+    if(steps_count[0] == 0 & stepping_drive_mode==0){
         unit_a_tim -> pause();
     }else{
         digitalWrite(driver_pin_array[0],stm_pattern[step_index][0]);
@@ -290,11 +341,11 @@ void proc_steps_a(void){
         digitalWrite(driver_pin_array[2],stm_pattern[step_index][1]);
         digitalWrite(driver_pin_array[3],!stm_pattern[step_index][1]);
 
-        if(stepping_count[0] > 0){
-            stepping_count[0]--;
+        if(steps_count[0] > 0){
+            steps_count[0]--;
             step_index++;
         }else{
-            stepping_count[0]++;
+            steps_count[0]++;
             step_index--;
         }
         if(step_index > 3){
@@ -302,13 +353,49 @@ void proc_steps_a(void){
         }else if(step_index < 0){
             step_index = 3;
         }
-    }
+    }*/
 }
 
 void proc_steps_b(void){
     static int8_t step_index = 0;
 
-    if(stepping_count[1] == 0 && !drive_stepping_infinity[1]){
+    digitalWrite(driver_pin_array[4],stm_pattern[step_index][0]);
+    digitalWrite(driver_pin_array[5],!stm_pattern[step_index][0]);
+    digitalWrite(driver_pin_array[6],stm_pattern[step_index][1]);
+    digitalWrite(driver_pin_array[7],!stm_pattern[step_index][1]);
+
+    if(stepping_drive_mode[1] == false){
+        //steps
+        if(steps_count[1] == 0){
+            unit_b_tim -> pause();
+        }else{
+            if(steps_count[1] > 0){
+                steps_count[1]--;
+                step_index++;
+            }else{
+                steps_count[1]++;
+                step_index--;
+            }
+        }
+    }else{
+        //speed
+        if(!stepping_dir[1]){
+            step_index++;
+        }else{
+            step_index--;
+        }
+    }
+    
+    if(step_index > 3){
+        step_index = 0;
+    }else if(step_index < 0){
+        step_index = 3;
+    }
+
+    /*
+    static int8_t step_index = 0;
+
+    if(steps_count[1] == 0 & !drive_stepping_infinity[1]){
         unit_b_tim -> pause();
     }else{
         digitalWrite(driver_pin_array[4],stm_pattern[step_index][0]);
@@ -316,11 +403,11 @@ void proc_steps_b(void){
         digitalWrite(driver_pin_array[6],stm_pattern[step_index][1]);
         digitalWrite(driver_pin_array[7],!stm_pattern[step_index][1]);
 
-        if(stepping_count[1] > 0){
-            stepping_count[1]--;
+        if(steps_count[1] > 0){
+            steps_count[1]--;
             step_index++;
         }else{
-            stepping_count[1]++;
+            steps_count[1]++;
             step_index--;
         }
 
@@ -330,6 +417,7 @@ void proc_steps_b(void){
             step_index = 3;
         }
     }
+    */
 }
 
 //void RECoreMotorDriverLibrary::stopMotor(uint8_t set_motor_num);

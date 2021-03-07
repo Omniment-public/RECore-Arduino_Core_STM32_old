@@ -32,8 +32,8 @@ class RECoreMotorDriverLibrary{
         void presetMotorSpeed(uint8_t set_motor_num, float set_motor_speed);
         void presetDrivePwm(uint8_t set_motor_num, int set_drive_pwm);
 
-        void setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed);
-        void setSteps(uint8_t set_driver_unit, int32_t set_step_count);
+        void setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed, bool dir);
+        void setSteppingSteps(uint8_t set_driver_unit, uint16_t set_motor_speed, int32_t set_step_count);
         
         void runMotor(uint8_t set_motor_num = 0);
         void stopMotor(uint8_t set_motor_num = 0);
@@ -49,6 +49,8 @@ class RECoreMotorDriverLibrary{
 
         uint16_t motor_step_count[2];
         uint32_t stepping_speed[2];
+
+        void presetSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed);
 };
 
 #endif
