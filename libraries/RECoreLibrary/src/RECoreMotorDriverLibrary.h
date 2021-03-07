@@ -23,33 +23,7 @@
 
 class RECoreMotorDriverLibrary{
     public:
-        RECoreMotorDriverLibrary(){
-            for(int i = 0; i < 11; i++){
-                driver_pin_array[i] = i + 14;
-            }
-            
-            //init pins
-            for(int i = 0; i < 9; i++){
-                pinMode(driver_pin_array[i], OUTPUT);
-                digitalWrite(driver_pin_array[i],0);
-            }
-            pinMode(driver_pin_array[9], INPUT_PULLUP);
-            pinMode(driver_pin_array[10], OUTPUT);
-            digitalWrite(driver_pin_array[10],0);
-
-            //driver sleep
-            digitalWrite(driver_pin_array[8],0);
-
-            //init motorcurrent;
-            setMotorCurrent(0);
-
-            //init motor pwm
-            for(int i = 0; i < 8; i++){
-                motor_pwm_value[i] = 0;
-            }
-
-            analogWriteFrequency(25000);
-        }
+        RECoreMotorDriverLibrary();
 
         void setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps = 200);
         void setMotorCurrent(float set_motor_current);
@@ -61,7 +35,7 @@ class RECoreMotorDriverLibrary{
         void presetDrivePwm(uint8_t set_motor_num, int set_drive_pwm);
 
         void setSteppingSpeed(uint8_t set_driver_unit, uint16_t set_motor_speed);
-        void setSteps(uint8_t set_driver_unit, int16_t set_step_count);
+        void setSteps(uint8_t set_driver_unit, int32_t set_step_count);
         
         void runMotor(uint8_t set_motor_num = 0);
         void stopMotor(uint8_t set_motor_num = 0);
@@ -79,13 +53,15 @@ class RECoreMotorDriverLibrary{
         //8 sleep
         //9 fault
         //10 vref
-        uint8_t driver_pin_array[11];
+        
         
         uint8_t driver_mode[2];
         float motor_current;
         uint8_t brake_mode[4];
         uint8_t motor_pwm_value[8];
 
+        uint16_t motor_step_count[2];
+        uint32_t stepping_speed[2];
 };
 
 #endif
