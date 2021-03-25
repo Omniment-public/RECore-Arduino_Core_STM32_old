@@ -54,6 +54,12 @@ RECoreMotorDriverLibrary::RECoreMotorDriverLibrary(){
         motor_pwm_value[i] = 0;
     }
     analogWriteFrequency(25000);
+
+    //set default brake mode
+    brake_mode[0] = ture;
+    brake_mode[1] = ture;
+    brake_mode[2] = ture;
+    brake_mode[3] = ture;
 }
 
 void RECoreMotorDriverLibrary::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps){
@@ -118,7 +124,7 @@ void RECoreMotorDriverLibrary::setMotorType(uint8_t set_driver_unit, uint8_t set
     driver_mode[set_driver_unit] = set_motor_type_num;
 }
 
-void RECoreMotorDriverLibrary::setMotorCurrent(float set_motor_current){
+void RECoreMotorDriverLibrary::setMotorCurrent(uint16_t set_motor_current){
     if(set_motor_current > 1.5 | set_motor_current < 0){
         return;
     }
@@ -127,8 +133,8 @@ void RECoreMotorDriverLibrary::setMotorCurrent(float set_motor_current){
     //12bit dac 0-4095 1.98/(3.3/4095)
     //float calc_dac_const = 2457.0;
     
-    //8bit dac 0-255 1.98/(3.3/255)
-    float calc_dac_const = 153.0;
+    //8bit dac 0-255 1.98/(3.3/255) / 1000
+    float calc_dac_const = 0.153;
 
     float calc_dac = set_motor_current * calc_dac_const;
     uint16_t calc_dac_16 = uint16_t(calc_dac);
