@@ -24,7 +24,7 @@ class RECoreMotorDriverLibrary{
         RECoreMotorDriverLibrary();
 
         void setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps = 200);
-        void setMotorCurrent(float set_motor_current);
+        void setMotorCurrent(uint16_t set_motor_current);
         void setBrakeMode(uint8_t set_motor_num, uint8_t set_brake_type);
         
         void setMotorSpeed(uint8_t set_motor_num, float set_motor_speed);

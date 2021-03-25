@@ -68,11 +68,6 @@ setAngularRateScale	KEYWORD2
 # Instances (KEYWORD2)
 #######################################
 
-RECoreLibrary	KEYWORD2
-RECoreMotorDriverLibrary	KEYWORD2
-RECoreAuxFuncLibrary	KEYWORD2
-RECoreLSM6Library	KEYWORD2
-
 #######################################
 # Constants (LITERAL1)
 #######################################
@@ -84,3 +79,12 @@ unit_a	LITERAL1
 unit_b	LITERAL1
 coast	LITERAL1
 brake	LITERAL1
+acc_2g	LITERAL1
+acc_4g	LITERAL1
+acc_8g	LITERAL1
+acc_16g	LITERAL1
+a_acc_250	LITERAL1
+a_acc_500	LITERAL1
+a_acc_1000	LITERAL1
+a_acc_2000	LITERAL1
+a_acc_125	LITERAL1
