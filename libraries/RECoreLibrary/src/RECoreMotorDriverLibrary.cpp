@@ -56,10 +56,10 @@ RECoreMotorDriverLibrary::RECoreMotorDriverLibrary(){
     analogWriteFrequency(25000);
 
     //set default brake mode
-    brake_mode[0] = ture;
-    brake_mode[1] = ture;
-    brake_mode[2] = ture;
-    brake_mode[3] = ture;
+    brake_mode[0] = true;
+    brake_mode[1] = true;
+    brake_mode[2] = true;
+    brake_mode[3] = true;
 }
 
 void RECoreMotorDriverLibrary::setMotorType(uint8_t set_driver_unit, uint8_t set_motor_type_num, uint16_t stm_steps){
