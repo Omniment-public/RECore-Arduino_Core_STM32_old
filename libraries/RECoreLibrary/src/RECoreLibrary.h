@@ -35,6 +35,29 @@
 #define a_acc_2000 3
 #define a_acc_125 4
 
+#define acc_rate_down 0x00
+#define acc_rate_12_5_Hz 0x01
+#define acc_rate_26_Hz 0x02
+#define acc_rate_52_Hz 0x03
+#define acc_rate_104_Hz 0x04
+#define acc_rate_208_Hz 0x05
+#define acc_rate_416_Hz 0x06
+#define acc_rate_833_Hz 0x07
+#define acc_rate_1660_Hz 0x08
+#define acc_rate_3330_Hz 0x09
+#define acc_rate_6660_Hz 0x0A
+
+#define a_acc_rate_down 0x00
+#define a_acc_rate_12_5_Hz 0x01
+#define a_acc_rate_26_Hz 0x02
+#define a_acc_rate_52_Hz 0x03
+#define a_acc_rate_104_Hz 0x04
+#define a_acc_rate_208_Hz 0x05
+#define a_acc_rate_416_Hz 0x06
+#define a_acc_rate_833_Hz 0x07
+#define a_acc_rate_1660_Hz 0x08
+
+
 class RECoreLibrary : public RECoreAuxFuncLibrary , public RECoreMotorDriverLibrary , public RECoreLSM6Library{
     public:
         RECoreLibrary() : RECoreAuxFuncLibrary() , RECoreMotorDriverLibrary() , RECoreLSM6Library(){
