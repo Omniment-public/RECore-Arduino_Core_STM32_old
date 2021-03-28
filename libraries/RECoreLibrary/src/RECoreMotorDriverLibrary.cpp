@@ -185,10 +185,11 @@ void RECoreMotorDriverLibrary::presetMotorSpeed(uint8_t set_motor_num, float set
     if(set_motor_num >= 2){
         target_driver_unit = 1;
     }
+
     if(driver_mode[target_driver_unit] == 1){
         //parallel
         if(set_motor_num == 0 | set_motor_num == 2){
-            set_motor_num + 1;
+            set_motor_num += 1;
         }
     }else if(driver_mode[target_driver_unit] == 2){
         //stepper
@@ -291,7 +292,7 @@ void RECoreMotorDriverLibrary::runMotor(uint8_t set_motor_num){
     if(driver_mode[target_driver_unit] == 1){
         //parallel
         if(set_motor_num == 0 | set_motor_num == 2){
-            set_motor_num + 1;
+            set_motor_num += 1;
         }
     }else if(driver_mode[target_driver_unit] == 2){
         //stepper
