@@ -44,4 +44,8 @@ void loop() {
   //set Motor 0 speed reverse 50%
   recore.setMotorSpeed(0, -0.5);
   delay(1000);
+
+  //stop motor 0
+  recore.setMotorSpeed(0, 0);
+  delay(1000);
 }
