@@ -125,7 +125,7 @@ void RECoreMotorDriverLibrary::setMotorType(uint8_t set_driver_unit, uint8_t set
 }
 
 void RECoreMotorDriverLibrary::setMotorCurrent(uint16_t set_motor_current){
-    if(set_motor_current > 1.5 | set_motor_current < 0){
+    if(set_motor_current > 1500){
         return;
     }
     
