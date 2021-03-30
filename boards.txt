@@ -1726,17 +1726,31 @@ menu.upload_method=Upload method
 recore_f072.name=RECore
 recore_f072.build.core=arduino
 
+# RECore f072 SafeStart
 recore_f072.menu.pnum.RECORE_F072=RECore
 recore_f072.menu.pnum.RECORE_F072.upload.maximum_data_size=16384
 recore_f072.menu.pnum.RECORE_F072.upload.maximum_size=65536
 
 recore_f072.menu.pnum.RECORE_F072.build.mcu=cortex-m0
-recore_f072.menu.pnum.RECORE_F072.build.board=recore_f072
+recore_f072.menu.pnum.RECORE_F072.build.board=RECORE_F072
 recore_f072.menu.pnum.RECORE_F072.build.series=STM32F0xx
 recore_f072.menu.pnum.RECORE_F072.build.product_line=STM32F072xB
 recore_f072.menu.pnum.RECORE_F072.build.variant=RECORE_F072
 recore_f072.menu.pnum.RECORE_F072.build.cmsis_lib_gcc=arm_cortexM0l_math
 recore_f072.menu.pnum.RECORE_F072.build.extra_flags=-D{build.product_line} {build.xSerial}
+
+# RECore f072 Without SafeStart
+recore_f072.menu.pnum.RECORE_F072_WOSS=RECore(Without SafeStart)
+recore_f072.menu.pnum.RECORE_F072_WOSS.upload.maximum_data_size=16384
+recore_f072.menu.pnum.RECORE_F072_WOSS.upload.maximum_size=65536
+
+recore_f072.menu.pnum.RECORE_F072_WOSS.build.mcu=cortex-m0
+recore_f072.menu.pnum.RECORE_F072_WOSS.build.board=RECORE_F072_WOSS
+recore_f072.menu.pnum.RECORE_F072_WOSS.build.series=STM32F0xx
+recore_f072.menu.pnum.RECORE_F072_WOSS.build.product_line=STM32F072xB
+recore_f072.menu.pnum.RECORE_F072_WOSS.build.variant=RECORE_F072_WOSS
+recore_f072.menu.pnum.RECORE_F072_WOSS.build.cmsis_lib_gcc=arm_cortexM0l_math
+recore_f072.menu.pnum.RECORE_F072_WOSS.build.extra_flags=-D{build.product_line} {build.xSerial}
 
 # Upload menu
 recore_f072.menu.upload_method.AutoDFUMethod=AutoDFU (Serial)
