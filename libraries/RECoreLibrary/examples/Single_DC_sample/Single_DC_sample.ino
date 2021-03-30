@@ -16,9 +16,9 @@ void setup() {
   recore.setMotorType(MOTOR_UNIT_B, SINGLE_DC);
 
   //set all motor current limit
-  //current range : 1 ~ 1500
+  //current range : 0 ~ 1500
   //setMotorCurrent(current);
-  
+
   //example set 500mA
   recore.setMotorCurrent(500);
 

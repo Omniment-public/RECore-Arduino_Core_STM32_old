@@ -17,7 +17,7 @@ void setup() {
 
   //set all motor current limit
   //setMotorCurrent(current);
-  //current : 1 ~ 1500
+  //current : 0 ~ 1500
 
   //example set 500mA
   recore.setMotorCurrent(500);
