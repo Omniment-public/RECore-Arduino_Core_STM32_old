@@ -26,16 +26,16 @@ void setup() {
   recore.setAccDataRate(acc_rate_104_Hz);
 
   //set Gyroscope ODR Rate
-  //a_acc_rate_down
-  //a_acc_rate_12_5_Hz
-  //a_acc_rate_26_Hz
-  //a_acc_rate_52_Hz
-  //a_acc_rate_104_Hz
-  //a_acc_rate_208_Hz
-  //a_acc_rate_416_Hz
-  //a_acc_rate_833_Hz
-  //a_acc_rate_1660_Hz
-  recore.setAngularRateDataRate(a_acc_rate_104_Hz);
+  //a_rate_down 0x00
+  //a_rate_12_5_Hz 0x01
+  //a_rate_26_Hz 0x02
+  //a_rate_52_Hz 0x03
+  //a_rate_104_Hz 0x04
+  //a_rate_208_Hz 0x05
+  //a_rate_416_Hz 0x06
+  //a_rate_833_Hz 0x07
+  //a_rate_1660_Hz 0x08
+  recore.setAngularRateDataRate(a_rate_104_Hz);
 }
 
 void loop() {

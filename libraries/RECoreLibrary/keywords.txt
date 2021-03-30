@@ -58,7 +58,7 @@ get_multibyte_data	KEYWORD2
 get_singlebyte_data	KEYWORD2
 write_singlebyte_data	KEYWORD2
 
-setAccRate	KEYWORD2
+setAccDataRate	KEYWORD2
 setAccScale	KEYWORD2
 setAccLpfBandwith	KEYWORD2
 setAngularRateDataRate	KEYWORD2
