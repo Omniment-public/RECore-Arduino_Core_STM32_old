@@ -14,48 +14,48 @@
 #include <RECoreMotorDriverLibrary.h>
 #include <RECoreLSM6Library.h>
 
-#define single_dc   0
-#define parallel_dc 1
-#define stepping    2
+#define SINGLE_DC   0
+#define PARALLEL_DC 1
+#define STEPPING    2
 
-#define unit_a 0
-#define unit_b 1
+#define MOTOR_UNIT_A 0
+#define MOTOR_UNIT_B 1
 
-#define coast 0
-#define brake 1
+#define COAST 0
+#define BRAKE 1
 
-#define acc_2g 0x00
-#define acc_4g 0x02
-#define acc_8g 0x03
-#define acc_16g 0x01
+#define ACC_2G 0x00
+#define ACC_4G 0x02
+#define ACC_8G 0x03
+#define ACC_16G 0x01
 
-#define a_rate_250dps 0x00
-#define a_rate_500dps 0x01
-#define a_rate_1000dps 0x02
-#define a_rate_2000dps 0x03
-#define a_rate_125dps 0x04
+#define A_RATE_250DPS 0x00
+#define A_RATE_500DPS 0x01
+#define A_RATE_1000DPS 0x02
+#define A_RATE_2000DPS 0x03
+#define A_RATE_125DPS 0x04
 
-#define acc_rate_down 0x00
-#define acc_rate_12_5_Hz 0x01
-#define acc_rate_26_Hz 0x02
-#define acc_rate_52_Hz 0x03
-#define acc_rate_104_Hz 0x04
-#define acc_rate_208_Hz 0x05
-#define acc_rate_416_Hz 0x06
-#define acc_rate_833_Hz 0x07
-#define acc_rate_1660_Hz 0x08
-#define acc_rate_3330_Hz 0x09
-#define acc_rate_6660_Hz 0x0A
+#define ACC_RATE_DOWN 0x00
+#define ACC_RATE_12_5_HZ 0x01
+#define ACC_RATE_26_HZ 0x02
+#define ACC_RATE_52_HZ 0x03
+#define ACC_RATE_104_HZ 0x04
+#define ACC_RATE_208_HZ 0x05
+#define ACC_RATE_416_HZ 0x06
+#define ACC_RATE_833_HZ 0x07
+#define ACC_RATE_1660_HZ 0x08
+#define ACC_RATE_3330_HZ 0x09
+#define ACC_RATE_6660_HZ 0x0A
 
-#define a_rate_down 0x00
-#define a_rate_12_5_Hz 0x01
-#define a_rate_26_Hz 0x02
-#define a_rate_52_Hz 0x03
-#define a_rate_104_Hz 0x04
-#define a_rate_208_Hz 0x05
-#define a_rate_416_Hz 0x06
-#define a_rate_833_Hz 0x07
-#define a_rate_1660_Hz 0x08
+#define A_RATE_DOWN 0x00
+#define A_RATE_12_5_HZ 0x01
+#define A_RATE_26_HZ 0x02
+#define A_RATE_52_HZ 0x03
+#define A_RATE_104_HZ 0x04
+#define A_RATE_208_HZ 0x05
+#define A_RATE_416_HZ 0x06
+#define A_RATE_833_HZ 0x07
+#define A_RATE_1660_HZ 0x08
 
 
 class RECoreLibrary : public RECoreAuxFuncLibrary , public RECoreMotorDriverLibrary , public RECoreLSM6Library{
