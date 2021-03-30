@@ -79,12 +79,36 @@ unit_a	LITERAL1
 unit_b	LITERAL1
 coast	LITERAL1
 brake	LITERAL1
+
 acc_2g	LITERAL1
 acc_4g	LITERAL1
 acc_8g	LITERAL1
 acc_16g	LITERAL1
-a_acc_250	LITERAL1
-a_acc_500	LITERAL1
-a_acc_1000	LITERAL1
-a_acc_2000	LITERAL1
-a_acc_125	LITERAL1
+
+a_rate_250dps	LITERAL1
+a_rate_500dps	LITERAL1
+a_rate_1000dps	LITERAL1
+a_rate_2000dps	LITERAL1
+a_rate_125dps	LITERAL1
+
+acc_rate_down	LITERAL1
+acc_rate_12_5_Hz	LITERAL1
+acc_rate_26_Hz	LITERAL1
+acc_rate_52_Hz	LITERAL1
+acc_rate_104_Hz	LITERAL1
+acc_rate_208_Hz	LITERAL1
+acc_rate_416_Hz	LITERAL1
+acc_rate_833_Hz	LITERAL1
+acc_rate_1660_Hz	LITERAL1
+acc_rate_3330_Hz	LITERAL1
+acc_rate_6660_Hz	LITERAL1
+
+a_rate_down	LITERAL1
+a_rate_12_5_Hz	LITERAL1
+a_rate_26_Hz	LITERAL1
+a_rate_52_Hz	LITERAL1
+a_rate_104_Hz	LITERAL1
+a_rate_208_Hz	LITERAL1
+a_rate_416_Hz	LITERAL1
+a_rate_833_Hz	LITERAL1
+a_rate_1660_Hz	LITERAL1
