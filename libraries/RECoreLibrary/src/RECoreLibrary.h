@@ -24,16 +24,16 @@
 #define coast 0
 #define brake 1
 
-#define acc_2g 0
-#define acc_4g 2
-#define acc_8g 3
-#define acc_16g 1
+#define acc_2g 0x00
+#define acc_4g 0x02
+#define acc_8g 0x03
+#define acc_16g 0x01
 
-#define a_acc_250 0
-#define a_acc_500 1
-#define a_acc_1000 2
-#define a_acc_2000 3
-#define a_acc_125 4
+#define a_rate_250dps 0x00
+#define a_rate_500dps 0x01
+#define a_rate_1000dps 0x02
+#define a_rate_2000dps 0x03
+#define a_rate_125dps 0x04
 
 #define acc_rate_down 0x00
 #define acc_rate_12_5_Hz 0x01
