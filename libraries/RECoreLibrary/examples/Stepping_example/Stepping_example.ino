@@ -15,14 +15,14 @@ void setup() {
   //stepping mode need step/rev
   //setMotorType(unit, stepping, step/rev)
   //example set 200step/rev
-  recore.setMotorType(unit_a, stepping, 200);
-  recore.setMotorType(unit_b, stepping, 200);
+  recore.setMotorType(MOTOR_UNIT_A, STEPPING, 200);
+  recore.setMotorType(MOTOR_UNIT_B, STEPPING, 200);
 
   //set all motor current limit
   //setMotorCurrent(current);
   //current range : 1 ~ 1500
   
-  //example set 100mA
+  //example set 300mA
   recore.setMotorCurrent(300);
 }
 
@@ -30,22 +30,22 @@ void loop() {
   //set Stepping speed
   //keep rotate stepping motor
   //setSteppingSpeed(motor unit, set speed, dir);
-  //motor unit : unit_a , unit_b
+  //motor unit : MOTOR_UNIT_A , MOTOR_UNIT_B
   //set speed : set min^-1
   //dir : true , false
 
-  //example set unit_a 200min^-1
-  recore.setSteppingSpeed(unit_a, 200, true);
+  //example set MOTOR_UNIT_A 200min^-1
+  recore.setSteppingSpeed(MOTOR_UNIT_A, 200, true);
   
   delay(1000);
-  recore.setSteppingSpeed(unit_a, 0, true);
+  recore.setSteppingSpeed(MOTOR_UNIT_A, 0, true);
   
   //set Stepping steps
   //Rotate set value times
   //setSteppingSpeed(motor unit, set speed, rotate value);
-  //motor unit : unit_a , unit_b
+  //motor unit : MOTOR_UNIT_A , MOTOR_UNIT_B
   //set speed : set min^-1
   //rotate value : int32_t
-  recore.setSteppingSteps(unit_a, 200, 200);
+  recore.setSteppingSteps(MOTOR_UNIT_A, 200, 200);
   delay(1000);
 }
