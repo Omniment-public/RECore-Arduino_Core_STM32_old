@@ -57,7 +57,6 @@
 #define A_RATE_833_HZ 0x07
 #define A_RATE_1660_HZ 0x08
 
-
 class RECoreLibrary : public RECoreAuxFuncLibrary , public RECoreMotorDriverLibrary , public RECoreLSM6Library{
     public:
         RECoreLibrary() : RECoreAuxFuncLibrary() , RECoreMotorDriverLibrary() , RECoreLSM6Library(){
