@@ -11,7 +11,7 @@ void setup() {
   //init serial
   Serial.begin(115200);
 
-  //set Acceleromater ODR Rate
+  //set Acceleromater Output Data Rate
   //acc_rate_down
   //acc_rate_12_5_Hz
   //acc_rate_26_Hz
@@ -25,7 +25,14 @@ void setup() {
   //acc_rate_6660_Hz
   recore.setAccDataRate(acc_rate_104_Hz);
 
-  //set Gyroscope ODR Rate
+  //set Acceleromater Output Data Scale
+  //acc_2g 0x00
+  //acc_4g 0x02
+  //acc_8g 0x03
+  //acc_16g 0x01
+  recore.setAccScale(acc_2g);
+
+  //set Gyroscope Output Data Rate
   //a_rate_down 0x00
   //a_rate_12_5_Hz 0x01
   //a_rate_26_Hz 0x02
@@ -36,6 +43,14 @@ void setup() {
   //a_rate_833_Hz 0x07
   //a_rate_1660_Hz 0x08
   recore.setAngularRateDataRate(a_rate_104_Hz);
+
+  //set Gyroscope Output Data Scale
+  //a_rate_250dps 0x00
+  //a_rate_500dps 0x01
+  //a_rate_1000dps 0x02
+  //a_rate_2000dps 0x03
+  //a_rate_125dps 0x04
+  recore.setAngularRateScale(a_rate_250dps);
 }
 
 void loop() {
@@ -71,6 +86,6 @@ void loop() {
   Serial.print(recore.getAngularRateY());
   Serial.print(",");
   Serial.println(recore.getAngularRateZ());
-  
+
   delay(5);
 }
