@@ -83,7 +83,7 @@ float RECoreLSM6Library::getAccScaleConstant(){
   float scale_arr[4] = {
     0.00006103701,
     0.00048829615,
-    0.00042725913,
+    0.00012207403,
     0.00024414807
     };
 
