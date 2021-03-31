@@ -132,6 +132,16 @@ extern "C" {
 // On-board user button
 #define USER_BTN                PA12
 
+// On-board Peripheral Pin
+#define SV1 PA8
+#define SV2 PA7
+#define SV3 PB8
+#define SV4 PB9
+#define SENS1 PA5
+#define SENS2 PA3
+#define SENS3 PA2
+#define SENS4 PA1
+
 // Below SPI and I2C definitions already done in the core
 // Could be redefined here if differs from the default one
 // SPI Definitions
@@ -148,8 +158,7 @@ extern "C" {
 #define PIN_SPI_2_MOSI    PB15
 #define PIN_SPI_2_MISO    PB14
 #define PIN_SPI_2_SCK     PB13
-    
-    
+
 // I2C Definitions
 //#define PIN_WIRE_SDA            14 // Default for Arduino connector compatibility
 //#define PIN_WIRE_SCL            15 // Default for Arduino connector compatibility

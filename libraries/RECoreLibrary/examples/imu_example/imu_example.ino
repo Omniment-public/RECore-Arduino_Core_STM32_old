@@ -12,45 +12,45 @@ void setup() {
   Serial.begin(115200);
 
   //set Acceleromater Output Data Rate
-  //acc_rate_down
-  //acc_rate_12_5_Hz
-  //acc_rate_26_Hz
-  //acc_rate_52_Hz
-  //acc_rate_104_Hz
-  //acc_rate_208_Hz
-  //acc_rate_416_Hz
-  //acc_rate_833_Hz
-  //acc_rate_1660_Hz
-  //acc_rate_3330_Hz
-  //acc_rate_6660_Hz
-  recore.setAccDataRate(acc_rate_104_Hz);
+  //ACC_RATE_DOWN 0x00
+  //ACC_RATE_12_5_HZ 0x01
+  //ACC_RATE_26_HZ 0x02
+  //ACC_RATE_52_HZ 0x03
+  //ACC_RATE_104_HZ 0x04
+  //ACC_RATE_208_HZ 0x05
+  //ACC_RATE_416_HZ 0x06
+  //ACC_RATE_833_HZ 0x07
+  //ACC_RATE_1660_HZ 0x08
+  //ACC_RATE_3330_HZ 0x09
+  //ACC_RATE_6660_HZ 0x0A
+  recore.setAccDataRate(ACC_RATE_104_HZ);
 
   //set Acceleromater Output Data Scale
-  //acc_2g 0x00
-  //acc_4g 0x02
-  //acc_8g 0x03
-  //acc_16g 0x01
-  recore.setAccScale(acc_2g);
+  //ACC_2G 0x00
+  //ACC_4G 0x02
+  //ACC_8G 0x03
+  //ACC_16G 0x01
+  recore.setAccScale(ACC_2G);
 
   //set Gyroscope Output Data Rate
-  //a_rate_down 0x00
-  //a_rate_12_5_Hz 0x01
-  //a_rate_26_Hz 0x02
-  //a_rate_52_Hz 0x03
-  //a_rate_104_Hz 0x04
-  //a_rate_208_Hz 0x05
-  //a_rate_416_Hz 0x06
-  //a_rate_833_Hz 0x07
-  //a_rate_1660_Hz 0x08
-  recore.setAngularRateDataRate(a_rate_104_Hz);
+  //A_RATE_DOWN 0x00
+  //A_RATE_12_5_HZ 0x01
+  //A_RATE_26_HZ 0x02
+  //A_RATE_52_HZ 0x03
+  //A_RATE_104_HZ 0x04
+  //A_RATE_208_HZ 0x05
+  //A_RATE_416_HZ 0x06
+  //A_RATE_833_HZ 0x07
+  //A_RATE_1660_HZ 0x08
+  recore.setAngularRateDataRate(A_RATE_104_HZ);
 
   //set Gyroscope Output Data Scale
-  //a_rate_250dps 0x00
-  //a_rate_500dps 0x01
-  //a_rate_1000dps 0x02
-  //a_rate_2000dps 0x03
-  //a_rate_125dps 0x04
-  recore.setAngularRateScale(a_rate_250dps);
+  //A_RATE_250DPS 0x00
+  //A_RATE_500DPS 0x01
+  //A_RATE_1000DPS 0x02
+  //A_RATE_2000DPS 0x03
+  //A_RATE_125DPS 0x04
+  recore.setAngularRateScale(A_RATE_250DPS);
 }
 
 void loop() {

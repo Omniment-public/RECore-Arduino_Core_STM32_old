@@ -9,15 +9,15 @@
 #ifndef RECoreMotorDriverLibrary_h
 #define RECoreMotorDriverLibrary_h
 
-#define single_dc   0
-#define parallel_dc 1
-#define stepping    2
+#define SINGLE_DC   0
+#define PARALLEL_DC 1
+#define STEPPING    2
 
-#define unit_a 0
-#define unit_b 1
+#define MOTOR_UNIT_A 0
+#define MOTOR_UNIT_B 1
 
-#define coast 0
-#define brake 1
+#define COAST 0
+#define BRAKE 1
 
 class RECoreMotorDriverLibrary{
     public:

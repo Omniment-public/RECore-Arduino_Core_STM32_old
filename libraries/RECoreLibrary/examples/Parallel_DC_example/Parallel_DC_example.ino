@@ -12,13 +12,13 @@ RECoreLibrary recore;
 
 void setup() {
   //init motor type parallel_dc mode
-  recore.setMotorType(unit_a, parallel_dc);
-  recore.setMotorType(unit_b, parallel_dc);
+  recore.setMotorType(MOTOR_UNIT_A, PARALLEL_DC);
+  recore.setMotorType(MOTOR_UNIT_B, PARALLEL_DC);
 
   //set all motor current limit
   //setMotorCurrent(current);
-  //current : 1 ~ 1500
-  
+  //current : 0 ~ 1500
+
   //example set 500mA
   recore.setMotorCurrent(500);
 
@@ -26,7 +26,7 @@ void setup() {
   //can change motor brake mode
   //setBrakeMode(motor number, brake type);
   //motor number : 0,2 (Parallel mode can set 0 or 2)
-  //brake type : brake , coast (default set brake)
+  //brake type : COAST , BRAKE (default set brake)
 }
 
 void loop() {
