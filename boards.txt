@@ -1725,6 +1725,7 @@ menu.upload_method=Upload method
 
 recore_f072.name=RECore
 recore_f072.build.core=arduino
+recore_f072.build.board=recore_f072
 
 # RECore f072 SafeStart
 recore_f072.menu.pnum.RECORE_F072=RECore
