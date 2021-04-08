@@ -168,7 +168,7 @@ void RECoreMotorDriverLibrary::presetMotorSpeed(uint8_t set_motor_num, float set
     }
 
     //calc pwm
-    uint8_t calc_motor_pwm = 255 * set_motor_speed;
+    uint8_t calc_motor_pwm = 255 * abs(set_motor_speed);
 
     bool dir = false;
     if(set_motor_speed > 0){
@@ -203,8 +203,8 @@ void RECoreMotorDriverLibrary::presetMotorSpeed(uint8_t set_motor_num, float set
         motor_pwm_value[control_motor_pin_num + 1] = calc_motor_pwm * !dir;
     }else{
         //brake mode
-        motor_pwm_value[control_motor_pin_num] = 255 - (calc_motor_pwm * dir);
-        motor_pwm_value[control_motor_pin_num + 1] = 255 - (calc_motor_pwm * !dir);
+        motor_pwm_value[control_motor_pin_num + 1] = 255 - (calc_motor_pwm * dir);
+        motor_pwm_value[control_motor_pin_num] = 255 - (calc_motor_pwm * !dir);
     }
     return;
 }
