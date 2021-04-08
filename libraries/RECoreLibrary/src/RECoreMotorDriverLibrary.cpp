@@ -224,9 +224,15 @@ void RECoreMotorDriverLibrary::presetDrivePwm(uint8_t set_motor_num, int set_dri
     }
 
     uint8_t control_motor_pin_num = set_motor_num * 2;
-    motor_pwm_value[control_motor_pin_num] = set_drive_pwm * dir;
-    motor_pwm_value[control_motor_pin_num + 1] = set_drive_pwm * !dir;
-    
+    if(brake_mode[set_motor_num] == 0){
+        //Coast mode
+        motor_pwm_value[control_motor_pin_num] = abs(set_drive_pwm) * dir;
+        motor_pwm_value[control_motor_pin_num + 1] = abs(set_drive_pwm) * !dir;
+    }else{
+        //brake mode
+        motor_pwm_value[control_motor_pin_num + 1] = 255 - abs(set_drive_pwm) * dir;
+        motor_pwm_value[control_motor_pin_num] = 255 - abs(set_drive_pwm) * !dir;
+    }
     return;
 }
 
