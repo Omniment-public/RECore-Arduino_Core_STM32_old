@@ -199,12 +199,12 @@ void RECoreMotorDriverLibrary::presetMotorSpeed(uint8_t set_motor_num, float set
     uint8_t control_motor_pin_num = set_motor_num * 2;
     if(brake_mode[set_motor_num] == 0){
         //Coast mode
-        motor_pwm_value[control_motor_pin_num] = calc_motor_pwm * dir;
-        motor_pwm_value[control_motor_pin_num + 1] = calc_motor_pwm * !dir;
+        motor_pwm_value[control_motor_pin_num + 1] = calc_motor_pwm * dir;
+        motor_pwm_value[control_motor_pin_num] = calc_motor_pwm * !dir;
     }else{
         //brake mode
-        motor_pwm_value[control_motor_pin_num + 1] = 255 - (calc_motor_pwm * dir);
-        motor_pwm_value[control_motor_pin_num] = 255 - (calc_motor_pwm * !dir);
+        motor_pwm_value[control_motor_pin_num] = 255 - (calc_motor_pwm * dir);
+        motor_pwm_value[control_motor_pin_num + 1] = 255 - (calc_motor_pwm * !dir);
     }
     return;
 }
@@ -226,12 +226,12 @@ void RECoreMotorDriverLibrary::presetDrivePwm(uint8_t set_motor_num, int set_dri
     uint8_t control_motor_pin_num = set_motor_num * 2;
     if(brake_mode[set_motor_num] == 0){
         //Coast mode
-        motor_pwm_value[control_motor_pin_num] = abs(set_drive_pwm) * dir;
-        motor_pwm_value[control_motor_pin_num + 1] = abs(set_drive_pwm) * !dir;
+        motor_pwm_value[control_motor_pin_num + 1] = abs(set_drive_pwm) * dir;
+        motor_pwm_value[control_motor_pin_num] = abs(set_drive_pwm) * !dir;
     }else{
         //brake mode
-        motor_pwm_value[control_motor_pin_num + 1] = 255 - abs(set_drive_pwm) * dir;
-        motor_pwm_value[control_motor_pin_num] = 255 - abs(set_drive_pwm) * !dir;
+        motor_pwm_value[control_motor_pin_num] = 255 - abs(set_drive_pwm) * dir;
+        motor_pwm_value[control_motor_pin_num + 1] = 255 - abs(set_drive_pwm) * !dir;
     }
     return;
 }
